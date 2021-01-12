@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   ZombieHorde.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 21:02:43 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/12 04:43:19 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/11 23:49:03 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/12 06:47:30 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
+#include "Zombie.hpp"
 
-class Zombie
+class ZombieHorde
 {
 	public:
-
-		Zombie(std::string name, std::string type);
-		Zombie(void);
-		~Zombie(void);
+		ZombieHorde(int amount);
+		~ZombieHorde(void);
 		void	announce(void) const;
-		void	setAnnounceText(std::string text);
-		static 	std::string getRandomName(void);
-		static 	std::string getRandomType(void);
-
+	
 	private:
-
-		std::string _name;
-		std::string _type;
-		std::string _announceText;
+		const int _amountOfZombies;
+		const Zombie *_zombies;
 };

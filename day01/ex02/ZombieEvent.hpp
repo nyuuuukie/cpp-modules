@@ -6,13 +6,11 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 21:08:56 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/11 00:35:33 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/12 01:12:07 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
-#include <iostream>
 
 #include "Zombie.hpp"
 

@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:02:18 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/10 06:58:08 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/12 05:55:47 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,18 @@ void	phonebookAdd(Contact contacts[])
 void	phonebookSearch(Contact contacts[])
 {
 	int	searchIndex;
-	
+	std::string input;
+
 	printTable(contacts, Contact::getCount());					
 	do {
 		std::cout << "Index (0 to ESC): ";
-		std::cin.clear();
-		std::cin >> searchIndex;
 
-		if (Contact::getCount() == 0)
+		getline(std::cin, input);
+		if (std::cin.eof())
+			break;
+
+		searchIndex = std::stoi(input);
+	 	if (Contact::getCount() == 0)
 			printLine("Phonebook is empty.");
 		else if (searchIndex > Contact::getCount())
 			printLine("Invalid phonebook index.");
@@ -106,7 +110,7 @@ int main()
 	{
 		std::cout << "> ";
 		std::cin.clear();
-		std::cin >> input;
+		getline(std::cin, input);
 
 		if (input.compare("HELP") == 0)
 			phonebookHelp();
@@ -118,6 +122,8 @@ int main()
 			break;
 		else
 			printLine("Command not found: " + input);
+		if (std::cin.eof())
+			break;
 	}
 	phonebookExit();
 	return (0);

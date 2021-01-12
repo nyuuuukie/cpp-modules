@@ -6,13 +6,13 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 21:00:28 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/12 06:50:49 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/12 06:46:03 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-std::string Zombie::getRandomName(void)
+std::string	Zombie::getRandomName(void)
 {
 	const int length = 13;
 	long long index;
@@ -36,45 +36,65 @@ std::string Zombie::getRandomName(void)
 	return names[index];
 }
 
-std::string Zombie::getRandomType(void)
+std::string	Zombie::getRandomType(void)
 {
-	const int length = 4;
+	const int length = 6;
 	long long index;
 	std::string types[length] = {
 						"Brainless",
-						"Skinny",
+						"Mad",
 						"Blessed",
 						"Stinky",
+						"Crazy",
+						"Furious"
 	};
 	
 	index = rand() % length;
 	return types[index];
 }
 
+std::string	Zombie::getRandomAnnounce(void)
+{
+	const int length = 4;
+	long long index;
+	std::string phrases[length] = {
+						"Braaaaaains...",
+						"Destroy humanity!",
+						"Dead or alive!",
+						"I'm bringing sexy back...(yeah)",
+	};
+	
+	index = rand() % length;
+	return phrases[index];
+}
+
 Zombie::Zombie(std::string name, std::string type) : _name(name), _type(type)
 {
-	_announceText = "Braaaaaains...";
-	std::cout << "Constructor called" << std::endl;
+	_announce = "Braaaaaains...";
+	std::cout << "[" + _type + " " + _name + "]: " << _announce << std::endl;
 }
 
 Zombie::Zombie(void)
 {
-	_announceText = "<No announce>";
-	std::cout << "Destructor called" << std::endl;
+	_name = Zombie::getRandomName();
+	_type = Zombie::getRandomType();
+	_announce = Zombie::getRandomAnnounce();
+
+	std::cout << _name + " is infected. -> zombie++" << std::endl;
 }
 
 Zombie::~Zombie(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << _type + " " + _name + " was killed." << std::endl;
 }
 
-void	Zombie::setAnnounceText(std::string text)
+void	Zombie::setAnnounce(std::string text)
 {
-	this->_announceText = text; 
+	this->_announce = text; 
 }
 
 void	Zombie::announce(void) const
 {
 	std::cout << "[" + _type + " " + _name + "]: ";
-	std::cout << _announceText << std::endl; 
+	std::cout << COLOR_BLUE << _announce << COLOR_RESET << std::endl;
 }
