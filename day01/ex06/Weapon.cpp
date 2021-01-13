@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 07:29:34 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 08:15:31 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:37:26 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	Weapon::setType(std::string type)
 	this->_type = type;
 }
 
-std::string& const	Weapon::setType(std::string type) const
+const std::string &	Weapon::getType(void)
 {
-	std::string & const ref = this->_type; //CHANGE
-	return ref;
+	return this->_type;
 }

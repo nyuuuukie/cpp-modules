@@ -6,35 +6,27 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 07:30:07 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 08:37:25 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:50:01 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
 
-HumanA(std::string name, Weapon& weapon) : _name(name)
+HumanA::HumanA(std::string name, Weapon& weapon) : _weapon(weapon)
 {
-	_weapon = &weapon;
+	this->_name = name;
+	std::cout << _name + " created." << std::endl;
 }
 
-HumanA::HumanA(std::string name) : _name(name)
+HumanA::HumanA(void) : _weapon(*new Weapon)
 {
-	std::cout << name + " created." << std::endl;
-}
-
-HumanA::HumanA(void)
-{
+	this->_name = "<Default name>";
 	std::cout << _name + " created." << std::endl;
 }
 
 HumanA::~HumanA(void)
 {
 	std::cout << _name + " destroyed." << std::endl;
-}
-
-void	HumanA::setWeapon(Weapon& weapon)
-{
-	_weapon = &weapon;
 }
 
 void	HumanA::attack(void)

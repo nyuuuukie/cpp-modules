@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 07:31:02 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 08:30:53 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:54:10 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class HumanB
 		HumanB(void);
 		~HumanB(void);
 		HumanB(std::string name);
-		HumanB(std::string name, Weapon& weapon);
 		void attack(void);
 		void setWeapon(Weapon& weapon);
 	
