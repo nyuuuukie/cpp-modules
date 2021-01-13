@@ -3,7 +3,7 @@ NAME=replacer
 CPP=clang++
 CPP_FLAGS=-Wall -Wextra -Werror
 
-SRC=
+SRC=replacer.cpp
 OBJ=$(SRC:.c=.o)
 
 all:$(NAME)
