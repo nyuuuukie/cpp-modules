@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Human.cpp                                          :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 06:03:46 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 07:48:15 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/13 07:30:21 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/13 08:29:13 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Human.hpp"
+#include "HumanB.hpp"
 
-Human::Human(void)
+HumanB::HumanB(std::string name) : _name(name)
 {
-	std::cout << "Human was born!" << std::endl;
+	std::cout << name + " created." << std::endl;
 }
 
-Human::~Human(void)
+HumanB::HumanB(void)
 {
-	std::cout << "Human is dead now." << std::endl;
+	std::cout << _name + " destroyed." << std::endl;
 }
 
-std::string	Human::identify(void)
+HumanB::~HumanB(void)
 {
-	return this->_brain.identify();
+	std::cout << _name + " destroyed." << std::endl;
 }
 
-Brain&	Human::getBrain(void)
+void	HumanB::setWeapon(Weapon& weapon)
 {
-	return this->_brain;
+	_weapon = weapon;
+}
+
+void	HumanB::attack(void)
+{
+	std::cout << _name + " attacks with his " + _weapon.getType() << std::endl;
 }

@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex01.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 20:51:57 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 07:45:05 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/13 07:29:34 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/13 08:15:31 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <iostream>
+#include "Weapon.hpp"
 
-void	memoryLeak()
+Weapon::Weapon(std::string type) : _type(type)
 {
-	std::string* panther = new std::string("String panther");
-	std::cout << *panther << std::endl;
-
-	delete panther;
 }
 
-// int main(void)
-// {
-// 	memoryLeak();
-// 	return (0);
-// }
+Weapon::Weapon(void)
+{
+	_type = "stick";
+}
+
+Weapon::~Weapon(void)
+{
+	std::cout << _type << " destroyed." << std::endl;
+}
+
+void	Weapon::setType(std::string type)
+{
+	this->_type = type;
+}
+
+std::string& const	Weapon::setType(std::string type) const
+{
+	std::string & const ref = this->_type; //CHANGE
+	return ref;
+}

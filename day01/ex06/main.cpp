@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex01.cpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 20:51:57 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 07:45:05 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/13 07:31:08 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/13 08:07:13 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-void	memoryLeak()
+int main(void)
 {
-	std::string* panther = new std::string("String panther");
-	std::cout << *panther << std::endl;
-
-	delete panther;
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
+	return (0);	
 }
-
-// int main(void)
-// {
-// 	memoryLeak();
-// 	return (0);
-// }

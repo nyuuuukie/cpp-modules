@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex01.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 20:51:57 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/13 07:45:05 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/13 07:31:02 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/13 08:30:53 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <iostream>
+#pragma once
 
-void	memoryLeak()
+#include "Weapon.hpp"
+
+class HumanB
 {
-	std::string* panther = new std::string("String panther");
-	std::cout << *panther << std::endl;
-
-	delete panther;
-}
-
-// int main(void)
-// {
-// 	memoryLeak();
-// 	return (0);
-// }
+	public:
+		HumanB(void);
+		~HumanB(void);
+		HumanB(std::string name);
+		HumanB(std::string name, Weapon& weapon);
+		void attack(void);
+		void setWeapon(Weapon& weapon);
+	
+	private:
+		std::string _name;
+		Weapon* _weapon;
+};
