@@ -3,8 +3,8 @@ NAME=replacer
 CPP=clang++
 CPP_FLAGS=-Wall -Wextra -Werror
 
-SRC=replacer.cpp
-OBJ=$(SRC:.c=.o)
+SRC=main.cpp Replacer.cpp
+OBJ=$(SRC:.cpp=.o)
 
 all:$(NAME)
 
@@ -15,7 +15,7 @@ $(NAME): $(OBJ)
 	$(CPP) $(CPP_FLAGS) -c $< -o $@
 
 clean:
-	rm rf $(OBJ)
+	rm -rf $(OBJ)
 
 fclean: clean
 	rm -rf $(NAME)
