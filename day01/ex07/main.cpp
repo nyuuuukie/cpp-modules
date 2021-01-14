@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replacer.cpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:08:50 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/14 18:57:52 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/15 02:40:56 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,20 @@
 
 typedef std::string string;
 
-//string	toUpperCase(string src)
-//{
-//	for (size_t i = 0; i < src.length(); i++)
-//	{
-//		if (std::islower(src[i]))
-//			src[i] = toupper(src[i]);
-//	}
-//	return src;
-//}
-
-//string getTextFromFile(std::ifstream& file)
-//{
-//	string input;
-//	string total;
-	
-//	while (!file.eof());
-//	{
-//		getline(file, input);
-//		total += "\n" + input;
-//	}
-//	return total;
-//}
-
-//string	replace(std::ifstream& file, const string s1, const string s2)
-//{
-//	string total;
-//	size_t index;
-	
-//	index = 0;
-//	total = getTextFromFile(file);
-//	while ((index = total.find(s1, index)) != string::npos)
-//	{
-//		total.replace(index, index + s1.length() - 1, s2);
-//	}
-//	return total;
-//}
-
-void getParameter(string &prm, string title)
+int	getParameter(string &prm, string title)
 {
-	string input;
+	string input = "";
 
 	do {
 		std::cout << title;
 		getline(std::cin, input);
 		
 		if (std::cin.eof())
-		{
-			prm = "";
-			break;
-		}
+			return (1);
 	}
 	while (input.compare("") == 0);
 	prm = input;
+	return (0);
 }
 
 int main(void)
@@ -80,22 +41,25 @@ int main(void)
 
 	for (;;)
 	{
-		//Need to create a exit point
-		getParameter(filename, "Enter filename: ");
-		getParameter(whatReplace, "What do you want to replace: ");
-		getParameter( whatReplaceWith, "What do you want to replace with: ");
-		
+		if (getParameter(filename, "Enter filename: "))
+			return (READ_FILE_ERROR);
+		if (getParameter(whatReplace, "What do you want to replace: "))
+			return (BAD_ARGUMENTS);
+		if (getParameter(whatReplaceWith, "What do you want to replace with: "))
+			return (BAD_ARGUMENTS);
+
 		replacer.setExtension(extension);
-		
-		//One of these methods set BAD_ARG
 		replacer.setInputFilename(filename);
 		replacer.whatReplace(whatReplace);
 		replacer.whatReplaceWith(whatReplaceWith);
 
 		if (replacer.getCode() == BAD_ARGUMENTS)
-			return (1);
+			replacer.printLine("Wrong input. ");
 		else
-			replacer.makeReplace();		
+			break;
 	}
-	return (0);
+	replacer.makeReplace();
+	if (replacer.getCode() == STRING_NOT_FOUND)
+		replacer.printColorLine("\nPattern " + whatReplace + " not found.", RED);
+	return (replacer.getCode());
 }

@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 13:49:58 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/14 18:58:57 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/15 02:41:31 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include <fstream>
 
 typedef std::string string;
+
+#define RED "\033[31m"
+#define DEF "\033[0m"
+#define WHITE "\033[37m"
 
 enum code
 {
@@ -45,11 +49,13 @@ class Replacer
 		void 	setExtension(string ext);
 		void	setInputFilename(string filename);
 		void	setOutputFilename(string filename);
-	private:
+		void	printLine(const string &text);
+		void	printColorLine(const string &text, const string color);
 	
-		string 	readFromFile(void);
+	private:
 		string	toUpperCase(string src);
 		void	writeToFile(string text);
+		string 	readFromFile(void);
 		
 		code	_code;
 		string	_replacer;
