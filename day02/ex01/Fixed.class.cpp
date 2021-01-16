@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 19:56:41 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/16 16:13:45 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:18:41 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ Fixed::Fixed(void)
 {
 	_value = 0;
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(float num)
+{
+	_value = roundf(num * (1 << _fractionalCount));
+	std::cout << "Float constructor called" << std::endl;
+}
+
+Fixed::Fixed(int num)
+{
+	_value = num << _fractionalCount;
+	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::~Fixed(void)
@@ -36,15 +48,29 @@ Fixed& Fixed::operator=(const Fixed& other)
 	return *this;
 }
 
+std::ostream& operator<<(std::ostream &out, const Fixed& other)
+{
+	return out << other.toFloat();
+}
+
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return this->_value;
 }
 
 void Fixed::setRawBits(int const raw)
 {	
 	this->_value = raw;
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)_value / (float)(1 << _fractionalCount));
+}
+
+int Fixed::toInt(void) const
+{
+	return (int)this->toFloat();
 }
 
 const int Fixed::_fractionalCount = 8;
