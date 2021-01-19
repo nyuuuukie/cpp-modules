@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:22 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/16 22:59:50 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/19 06:08:54 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,36 @@ class FragTrap
 	public:
 	
 		FragTrap(void);
+		FragTrap(FragTrap const & other);	
 		FragTrap(string name);
 		~FragTrap(void);
 		
-		void rangedAttack(std::string const & target)
-		void meleeAttack(std::string const & target)
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
-	
+		FragTrap & operator=(FragTrap const & other);
+		
+		void	init(string name);
+		void	printAttack(string const & target, string const attack);
+		int		highVoltage(std::string const & target);
+		int		rangedAttack(std::string const & target);
+		int		meleeAttack(std::string const & target);
+		int		vaulthunter_dot_exe(std::string const & target);
+		void	takeDamage(unsigned int amount);
+		void	beRepaired(unsigned int amount);
+		
+		//GETTERS AND SETTERS
+		int				getHP(void);
+		const string & 	getName(void);
+
 	private:
-		int _hp; //(100)
-		int _max_hp;// (100)
-		int _ep; //(100)
-		int _max_ep; // (100)
-		int _level; // (1)
-		string _name; //(Parameter of constructor)
-		int _meleeDamage; //(30)
-		int _rangedDamage; //(20)
-		int _armorDamageReduction; //(5)
+
+		int _hp;
+		int _ep;
+		int _level;
+		int _max_hp;
+		int _max_ep;
+		string _name;
+		int _meleeDamage;
+		int _rangedDamage;
+		int _vaulthunterMinLimit;
+		int _rangedDamageMinLimit;
+		int _armorDamageReduction;
 };
