@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:22 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/19 06:08:54 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/20 07:50:40 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ class FragTrap
 		FragTrap & operator=(FragTrap const & other);
 		
 		void	init(string name);
-		void	printAttack(string const & target, string const attack);
-		int		highVoltage(std::string const & target);
 		int		rangedAttack(std::string const & target);
 		int		meleeAttack(std::string const & target);
 		int		vaulthunter_dot_exe(std::string const & target);
+		void	printAttack(string const & target, string const attack, int damage);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		

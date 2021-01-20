@@ -6,14 +6,14 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/19 06:09:58 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/20 08:02:14 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
 typedef std::string string;
-
+		
 void	FragTrap::init(string name)
 {
 	_name = name;
@@ -75,11 +75,16 @@ const string & FragTrap::getName(void)
 	return this->_name;
 }
 
-void	FragTrap::printAttack(string const & target, string const attack)
+int	FragTrap::getHP(void)
+{
+	return this->_hp;
+}
+
+void	FragTrap::printAttack(string const & target, string const attack, int damage)
 {
 	std::cout << "FR4G-TP " << this->_name << " ";
 	std::cout << "used "<< attack << " attack on " << target << " ";
-	std::cout << "causing " << _rangedDamage << " ";
+	std::cout << "causing " << damage << " ";
 	std::cout << "points of damage!" << std::endl;
 }
 
@@ -88,7 +93,7 @@ int FragTrap::rangedAttack(std::string const & target)
 	if (_ep >= _rangedDamageMinLimit)
 	{
 		_ep -= _rangedDamageMinLimit;
-		printAttack(target, "ranged");
+		printAttack(target, "ranged", _rangedDamage);
 		return _rangedDamage;
 	}
 	return (0);
@@ -96,36 +101,14 @@ int FragTrap::rangedAttack(std::string const & target)
 
 int FragTrap::meleeAttack(std::string const & target)
 {
-	printAttack(target, "melee");
+	printAttack(target, "melee", _meleeDamage);
 	return (_meleeDamage);
-}
-
-int FragTrap::highVoltage(std::string const & target)
-{
-	if (_ep >= _rangedDamageMinLimit)
-	{
-		_ep -= _rangedDamageMinLimit;
-		printAttack(target, "HIGH VOLTAGE");
-		return ;
-	}
-	return (0);
-}
-
-int FragTrap::highVoltage(std::string const & target)
-{
-	printAttack(target, "HIGH VOLTAGE");
-}
-
-
-int FragTrap::highVoltage(std::string const & target)
-{
-	printAttack(target, "HIGH VOLTAGE");
 }
 
 void	FragTrap::takeDamage(unsigned int amount)
 {
 	int damage = amount - _armorDamageReduction;
-	_hp -= damage > 0 ? damage : 0;	
+	_hp = _hp - damage > 0 ? _hp - damage : 0; 
 }
 
 void	FragTrap::beRepaired(unsigned int amount)
@@ -136,12 +119,15 @@ void	FragTrap::beRepaired(unsigned int amount)
 
 int FragTrap::vaulthunter_dot_exe(std::string const & target)
 {
+	int r = 0;
 	int damageGiven = 0;
+	float damagesCoeff[] = {1.3, 1.5, 1.7, 1.9, 2.1};
+	string attacks[] = {"HIGH VOLTAGE", "THERMONUCLEAR BOMB", "ENERGY STORM", "DANCE OF BLADES", "ULTIMATE SUNLIGHT STREAM"};
 	if (_ep >= _vaulthunterMinLimit)
 	{
 		_ep -= _vaulthunterMinLimit;
-		//RANDOM ATTACK
-		rand() % 5;
+		r = rand() % 5;
+		printAttack(target, attacks[r], static_cast<int>(_rangedDamage * damagesCoeff[r]));
 	}
 	else
 	{
@@ -149,3 +135,4 @@ int FragTrap::vaulthunter_dot_exe(std::string const & target)
 	}
 	return (damageGiven);
 }
+ 
