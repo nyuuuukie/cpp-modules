@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/20 09:14:15 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/21 13:27:38 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	ScavTrap::init(string name)
 ScavTrap::ScavTrap(void) : _max_hp(100), _max_ep(50) 
 {
 	init("Default");
-	std::cout << "[FR4G-TP " << _name << "] : Hey, best friend!" << std::endl;
+	std::cout << "[SC4V-TP " << _name << "] : Hey, best friend!" << std::endl;
 }
 
 ScavTrap::ScavTrap(string name)  : _max_hp(100), _max_ep(50)
 {
 	init(name);
-	std::cout << "[FR4G-TP " << _name << "] : Let me teach you the ways of magic!";
+	std::cout << "[SC4V-TP " << _name << "] : Let me teach you the ways of magic!";
 	std::cout << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "[FR4G-TP " << _name << "] : ";
-	std::cout << " Alaka-ZAM!" << std::endl;
-	std::cout << "*BOOOM*" << std::endl;
+	std::cout << "[SC4V-TP " << _name << "] : ";
+	std::cout << " Away with thee!" << std::endl;
+	std::cout << "*BLAM*" << std::endl;
 }
 
 ScavTrap::ScavTrap(ScavTrap const & other)
@@ -78,7 +78,7 @@ int	ScavTrap::getHP(void)
 
 void	ScavTrap::printAttack(string const & target, string const attack, int damage)
 {
-	std::cout << "FR4G-TP " << this->_name << " ";
+	std::cout << "SC4V-TP " << this->_name << " ";
 	std::cout << "used "<< attack << " attack on " << target << " ";
 	std::cout << "causing " << damage << " ";
 	std::cout << "points of damage!" << std::endl;
@@ -115,6 +115,10 @@ void	ScavTrap::beRepaired(unsigned int amount)
 
 void ScavTrap::challengeNewcomer(void)
 {
+	const int length = 5;
+	string challenges[length] = {"FEED CRAZY KITTY", "", "", "", ""};
+	int i = rand() % length;
 
+	std::cout << "[SC4V-TP " + _name + "]: it's time to " << challenges[i] + "." << std::endl;
 }
  
