@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/22 15:18:13 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/22 23:34:23 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void attackScavTrap(ScavTrap & scav, FragTrap & frag)
 	else
 	{
 		scav.challengeNewcomer();
-		scav.beRepaired(10);
+		scav.beRepaired(5);
 	}
 	
 	if (damage != 0)
