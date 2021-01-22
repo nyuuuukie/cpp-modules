@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/22 23:31:54 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/23 00:20:43 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@ typedef std::string string;
 
 FragTrap::FragTrap(void) : ClapTrap()
 {
-	_type = "FR4G-TP";
 	_vaulthunterMinLimit = 25;
-	std::cout << getQuoteName() << "] : Hey, best friend!" << std::endl;
+	std::cout << getQuoteName() << "Hey, best friend!" << std::endl;
 }
 
-FragTrap::FragTrap(string name) : ClapTrap(name)  
+FragTrap::FragTrap(string name) : ClapTrap(name, "FR4G-TP", 100, 100, 100, 100, 1, 30, 20, 5)  
 {
 	FragTrap();
 }
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << getQuoteName() << ": Alaka-ZAM!" << std::endl;
+	std::cout << getQuoteName() << "Alaka-ZAM!" << std::endl;
 	std::cout << "*BOOOM*" << std::endl;
 }
 
@@ -46,7 +45,7 @@ FragTrap & FragTrap::operator=(FragTrap const & other)
 
 const string  FragTrap::getQuoteName(void) const
 {
-	return "[FR4G-TP " + this->_name + "] ";
+	return "[FR4G-TP " + this->_name + "] : ";
 }
 
 int FragTrap::vaulthunter_dot_exe(std::string const & target)
@@ -72,7 +71,7 @@ int FragTrap::vaulthunter_dot_exe(std::string const & target)
 	}
 	else
 	{
-		std::cout << getQuoteName() << ": " << "Out of energy!" << std::endl;
+		std::cout << getQuoteName() << "Out of energy!" << std::endl;
 	}
 	return (damageGiven);
 }

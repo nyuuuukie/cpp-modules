@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 15:26:07 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/22 22:49:36 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/23 00:27:48 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 
 typedef std::string string;
 
-void	ClapTrap::init(string name)
+ClapTrap::ClapTrap(void)
 {
-	_name = name;
-	_type = "CL4P-TP"; 
 	_hp = 100;
+	_max_hp = 100;
 	_ep = 100;
+	_max_ep = 100;
+	_name = "Clu";
+	_type = "CL4P-TP";
 	_level = 1;
-	_meleeDamage = 30;
-	_rangedDamage = 20;
+	_meleeDamage = 10;
+	_rangedDamage = 10;
 	_armorDamageReduction = 5;
-}
-
-ClapTrap::ClapTrap(void) : _max_hp(100), _max_ep(100) 
-{
-	init("Clu");
 	std::cout << _type << " " << _name << " turned on." << std::endl;
 }
 
-ClapTrap::ClapTrap(string name)  : _max_hp(100), _max_ep(100)
+ClapTrap::ClapTrap(string name, string type, int hp, int max_hp, int ep, int max_ep, int lvl, int meleeDmg, int rangedDmg, int armorReduction)
+			 	: _hp(hp), _ep(ep), _level(lvl), _max_hp(max_hp), _max_ep(max_ep), _type(type)
 {
-	init(name);
+	_armorDamageReduction = armorReduction;
+	_rangedDamage = rangedDmg;
+	_meleeDamage = meleeDmg;
+	_name = name;
 	std::cout << _type << " " << _name << " turned on." << std::endl;
 }
 
@@ -73,6 +74,11 @@ int ClapTrap::getHP(void) const
 const string & ClapTrap::getName(void) const
 {
 	return this->_name;
+}
+
+const string & ClapTrap::getType(void) const
+{
+	return this->_type;
 }
 
 int ClapTrap::rangedAttack(std::string const & target)

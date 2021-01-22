@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/22 23:35:02 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/23 00:22:04 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ typedef std::string string;
 
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
-	_type = "SC4V-TP";
-	std::cout << getQuoteName() << " : " << std::endl;
+	std::cout << getQuoteName() << "I got quests!" << std::endl;
 }
 
-ScavTrap::ScavTrap(string name) : ClapTrap(name)  
+ScavTrap::ScavTrap(string name) : ClapTrap(name, "SC4V-TP", 100, 100, 50, 50, 1, 20, 15, 3)  
 {
 	ScavTrap();
 }
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << getQuoteName() << ": Away with thee!" << std::endl;
+	std::cout << getQuoteName() << "Away with thee!" << std::endl;
 	std::cout << "*BOOOM*" << std::endl;
 }
 
@@ -44,7 +43,7 @@ ScavTrap & ScavTrap::operator=(ScavTrap const & other)
 
 const string  ScavTrap::getQuoteName(void) const
 {
-	return "[SC4V-TP " + this->_name + "] ";
+	return "[SC4V-TP " + this->_name + "] : ";
 }
 
 void ScavTrap::challengeNewcomer(void) const
@@ -58,6 +57,6 @@ void ScavTrap::challengeNewcomer(void) const
 	};
 	int i = rand() % length;
 
-	std::cout << getQuoteName() << ": it's time to " << challenges[i] + "." << std::endl;
+	std::cout << getQuoteName() << "it's time to " << challenges[i] + "." << std::endl;
 }
  
