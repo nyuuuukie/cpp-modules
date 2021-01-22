@@ -6,74 +6,82 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/20 07:58:15 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/22 11:46:14 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+
 #include <cstdlib>
 #include <ctime>
 
-void attack(FragTrap & first, FragTrap & second)
+void attackFragTrap(FragTrap & frag, ScavTrap & scav)
 {
 	int number = rand () % 3;
-	int damage;
+	int damage = 0;
 
 	if (number == 0)
-		damage = first.meleeAttack(second.getName());
+		damage = frag.meleeAttack(scav.getName());
 	if (number == 1)
-		damage = first.rangedAttack(second.getName());
+		damage = frag.rangedAttack(scav.getName());
 	if (number == 2)
-		damage = first.vaulthunter_dot_exe(second.getName());
-	second.takeDamage(damage);
-	first.beRepaired(damage / 2);
+		damage = frag.vaulthunter_dot_exe(scav.getName());
+	scav.takeDamage(damage);
+	frag.beRepaired(damage / 2);
 }
 
-void	win(FragTrap & winner, FragTrap & loser)
+void attackScavTrap(ScavTrap & scav, FragTrap & frag)
 {
-	std::cout << "CHAMPION [FR4G-TP " << "\033[32m" << winner.getName();
+	int number = rand () % 3;
+	int damage = 0;
+
+	if (number == 0)
+		damage = scav.meleeAttack(frag.getName());
+	if (number == 1)
+		damage = scav.rangedAttack(frag.getName());
+	else
+		scav.challengeNewcomer();
+	
+	if (damage != 0)
+	{
+		frag.takeDamage(damage);
+		scav.beRepaired(damage / 2);
+	}
+}
+
+void	win(const string & winner, const string & loser)
+{
+	std::cout << "CHAMPION [" << "\033[32m" << winner;
 	std::cout << "\033[0m" << "] smashed ";
-	std::cout << loser.getName() << "!!!" << std::endl;	
+	std::cout << loser << "!!!" << std::endl;	
 }
 
-int startBattle(FragTrap & first, FragTrap & second)
+int startBattle(FragTrap & frag, ScavTrap & scav)
 {
-	while (first.getHP() > 0 && second.getHP() > 0) 
+	while (frag.getHP() > 0 && scav.getHP() > 0) 
 	{
 		if (rand () % 2)
-			attack(first, second);		
+			attackFragTrap(frag, scav);
 		else
-			attack(second, first);
+			attackScavTrap(scav, frag);		
 	}
-	if (first.getHP())
-		win(first, second);
+	if (frag.getHP())
+		win(frag.getName(), scav.getName());
 	else
-		win(first, second);
+		win(scav.getName(), frag.getName());
 	return (0);
 }
 
 int main(void) 
 {
 	srand(time(0));
-	FragTrap firstTrap("Drillbit");
-	FragTrap secondTrap("Iciqtron");
+
+	FragTrap frag("Cybel");
+	ScavTrap scav("Iztron");
+
 	std::cout << "------------------------------START BATTLE------------------------------" << std::endl;
-	startBattle(firstTrap, secondTrap);
+	startBattle(frag, scav);
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	return (0);
 }
-
-class ClassA
-{
-	public:	
-		ClassA(void);
-		~ClassA(void);
-		ClassA(const ClassA & other);
-		ClassA & operator=(const ClassA & other);
-	
-	private:
-		
-	protected:
-		
-};
-

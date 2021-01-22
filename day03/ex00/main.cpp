@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/20 07:58:15 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/22 11:05:12 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,3 @@ int main(void)
 	std::cout << "------------------------------------------------------------------------" << std::endl;
 	return (0);
 }
-
-class ClassA
-{
-	public:	
-		ClassA(void);
-		~ClassA(void);
-		ClassA(const ClassA & other);
-		ClassA & operator=(const ClassA & other);
-	
-	private:
-		
-	protected:
-		
-};
-

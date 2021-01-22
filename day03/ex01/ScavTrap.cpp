@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/21 13:27:38 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/22 11:41:50 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ ScavTrap::ScavTrap(string name)  : _max_hp(100), _max_ep(50)
 ScavTrap::~ScavTrap(void)
 {
 	std::cout << "[SC4V-TP " << _name << "] : ";
-	std::cout << " Away with thee!" << std::endl;
-	std::cout << "*BLAM*" << std::endl;
+	std::cout << "Away with thee!" << std::endl;
+	std::cout << "*BAAA-BAH*" << std::endl;
 }
 
 ScavTrap::ScavTrap(ScavTrap const & other)
@@ -116,7 +116,12 @@ void	ScavTrap::beRepaired(unsigned int amount)
 void ScavTrap::challengeNewcomer(void)
 {
 	const int length = 5;
-	string challenges[length] = {"FEED CRAZY KITTY", "", "", "", ""};
+	string challenges[length] = {"FEED CRAZY KITTY WITH BANANAS",
+								 "RIDE ON THE INTERSTELLAR SPACESHIP",
+								 "GO INTO ANOTHER DIMENSION",
+								 "CATCH A RAINBOW",
+								 "DO IT! JUST DO IT!"
+	};
 	int i = rand() % length;
 
 	std::cout << "[SC4V-TP " + _name + "]: it's time to " << challenges[i] + "." << std::endl;
