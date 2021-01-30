@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:19 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/23 01:03:57 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 14:12:45 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ ScavTrap::ScavTrap(void) : ClapTrap()
 	std::cout << getQuoteName() << "I got quests!" << std::endl;
 }
 
-ScavTrap::ScavTrap(string name) : ClapTrap(name, "SC4V-TP", 100, 100, 50, 50, 1, 20, 15, 3)  
+ScavTrap::ScavTrap(string name) : ClapTrap(name)  
 {
-	ScavTrap();
+	_type = "SC4V-TP";
+	_ep = 50;
+	_max_ep = 50;
+	_meleeDamage = 20;
+	_rangedDamage = 15;
+	_armorDamageReduction = 3;
 }
 
 ScavTrap::~ScavTrap(void)

@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/30 10:54:14 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 14:50:05 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int specialAttack(ClapTrap *first, ClapTrap *second)
 	int damage = 0;
 
 	if (first->getType() == "FR4G-TP")
-		damage = ((FragTrap *)first)->vaulthunter_dot_exe(second->getName());
+		damage = dynamic_cast<FragTrap *>(first)->vaulthunter_dot_exe(second->getName());
 	else if (first->getType() == "SC4V-TP")
 	{
-		((ScavTrap *)first)->challengeNewcomer();
-		((ScavTrap *)first)->beRepaired(5);
+		dynamic_cast<ScavTrap *>(first)->challengeNewcomer();
+		dynamic_cast<ScavTrap *>(first)->beRepaired(5);
 	}
 	else if (first->getType() == "NINJA-TP")
 	{
-		((NinjaTrap *)first)->ninjaShoebox(*second);
-		((NinjaTrap *)first)->beRepaired(8);
+		dynamic_cast<NinjaTrap *>(first)->ninjaShoebox(*second);
+		dynamic_cast<NinjaTrap *>(first)->beRepaired(8);
 	}
 	else
 		std::cout << "A HAVE NO SUPERPOWERS!" << std::endl;
@@ -40,14 +40,14 @@ int specialAttack(ClapTrap *first, ClapTrap *second)
 
 void attackClapTrap(ClapTrap *first, ClapTrap *second)
 {
-	int number = rand () % 3;
+	int number = rand () % 10;
 	int damage = 0;
 
-	if (number == 0)
+	if (number < 4)
 		damage = first->meleeAttack(second->getName());
-	else if (number == 1)
+	else if (number < 8)
 		damage = first->rangedAttack(second->getName());
-	else if (number == 2)
+	else if (number == 8 || number == 9)
 		damage = specialAttack(first, second);
 	
 	if (damage != 0)
@@ -86,11 +86,11 @@ int main(void)
 
 	FragTrap frag("Cybel");
 	ScavTrap scav("Iztron");
+	ClapTrap clap("Altron");
 	NinjaTrap ninja("Uzamaki");
-	ClapTrap clap;
-
+	
 	std::cout << "------------------------------START FIRST BATTLE------------------------------" << std::endl;
-	startBattle(frag, scav);
+	startBattle(ninja, frag);
 	std::cout << "------------------------------------------------------------------------------" << std::endl;
 
 	std::cout << std::endl;
@@ -99,10 +99,10 @@ int main(void)
 	startBattle(ninja, clap);
 	std::cout << "-------------------------------------------------------------------------------" << std::endl;
 
-	//ninja.ninjaShoebox(frag);
-	//ninja.ninjaShoebox(scav);
-	//ninja.ninjaShoebox(clap);
-	//ninja.ninjaShoebox(ninja);
+	ninja.ninjaShoebox(frag);
+	ninja.ninjaShoebox(scav);
+	ninja.ninjaShoebox(clap);
+	ninja.ninjaShoebox(ninja);
 	
 	return (0);
 }

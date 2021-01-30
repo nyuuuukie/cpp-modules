@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   NinjaTrap.hpp                                      :+:      :+:    :+:   */
+/*   SuperTrap.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/23 00:35:06 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/30 13:13:38 by mhufflep         ###   ########.fr       */
+/*   Created: 2021/01/30 11:08:56 by mhufflep          #+#    #+#             */
+/*   Updated: 2021/01/30 13:54:44 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "FragTrap.hpp"
-#include "ScavTrap.hpp"
-#include "ClapTrap.hpp"
 #include "NinjaTrap.hpp"
-
+	
 typedef std::string string;
 
-class NinjaTrap : virtual public ClapTrap
+class SuperTrap : public FragTrap, public NinjaTrap
 {
 	public:
 	
-		NinjaTrap(void);
-		virtual ~NinjaTrap(void);
+		SuperTrap(void);
+		SuperTrap(string name);
+		
+		virtual ~SuperTrap(void);
+		
+		SuperTrap(const SuperTrap & other);
+		SuperTrap & operator=(const SuperTrap & other);
 
-		NinjaTrap(string name);
-		NinjaTrap(const NinjaTrap & other);
-		NinjaTrap & operator=(const NinjaTrap & other);
-	 	
-		void	ninjaShoebox(FragTrap & frag);
-		void	ninjaShoebox(ScavTrap & scav);
-		void	ninjaShoebox(ClapTrap & clap);
-		void	ninjaShoebox(NinjaTrap & ninja); 
+		void	meleeAttack(std::string const &target);
+    	void	rangedAttack(std::string const &target);
 };

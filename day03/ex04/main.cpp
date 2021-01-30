@@ -6,12 +6,14 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/30 14:52:14 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 14:48:02 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "NinjaTrap.hpp"
+#include "SuperTrap.hpp"
 
 #include <cstdlib>
 #include <ctime>
@@ -26,6 +28,21 @@ int specialAttack(ClapTrap *first, ClapTrap *second)
 	{
 		dynamic_cast<ScavTrap *>(first)->challengeNewcomer();
 		dynamic_cast<ScavTrap *>(first)->beRepaired(5);
+	}
+	else if (first->getType() == "NINJA-TP")
+	{
+		dynamic_cast<NinjaTrap *>(first)->ninjaShoebox(*second);
+		dynamic_cast<NinjaTrap *>(first)->beRepaired(8);
+	}
+	else if (first->getType() == "SUP3R-TP")
+	{
+		if (rand() % 2 == 1)
+			damage = dynamic_cast<FragTrap *>(first)->vaulthunter_dot_exe(second->getName());
+		else
+		{
+			dynamic_cast<NinjaTrap *>(first)->ninjaShoebox(*second);
+			dynamic_cast<NinjaTrap *>(first)->beRepaired(8);
+		}
 	}
 	else
 		std::cout << "A HAVE NO SUPERPOWERS!" << std::endl;
@@ -81,16 +98,23 @@ int main(void)
 	FragTrap frag("Cybel");
 	ScavTrap scav("Iztron");
 	ClapTrap clap("Altron");
+	NinjaTrap ninja("Uzamaki");
+	SuperTrap super("Super");
 	
 	std::cout << "------------------------------START FIRST BATTLE------------------------------" << std::endl;
-	startBattle(scav, clap);
+	startBattle(super, frag);
 	std::cout << "------------------------------------------------------------------------------" << std::endl;
 
 	std::cout << std::endl;
 	
-	std::cout << "------------------------------START SECOND BATTLE------------------------------" << std::endl;
-	startBattle(frag, clap);
-	std::cout << "-------------------------------------------------------------------------------" << std::endl;
+	//std::cout << "------------------------------START SECOND BATTLE------------------------------" << std::endl;
+	//startBattle(ninja, clap);
+	//std::cout << "-------------------------------------------------------------------------------" << std::endl;
+
+	//ninja.ninjaShoebox(frag);
+	//ninja.ninjaShoebox(scav);
+	//ninja.ninjaShoebox(clap);
+	//ninja.ninjaShoebox(ninja);
 	
 	return (0);
 }

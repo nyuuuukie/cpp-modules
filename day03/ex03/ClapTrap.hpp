@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 15:26:16 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/23 00:57:41 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 14:10:35 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ class ClapTrap
 	public:
 	
 		ClapTrap(void);
-		~ClapTrap(void);
+		ClapTrap(string const & name);
+		virtual ~ClapTrap(void);
 		
 		ClapTrap(ClapTrap const & other);	
-		ClapTrap(string name, string type, int hp, int max_hp, int ep, int max_ep,
-		 				int lvl, int meleeDmg, int rangedDmg, int armorReduction);
 		
 		ClapTrap & operator=(ClapTrap const & other);
 		
@@ -36,11 +35,14 @@ class ClapTrap
 		void	beRepaired(unsigned int amount);
 		void	printAttack(string const & target, string const attack, int damage) const;
 
+		//Getters and setters
 		int				getHP(void) const;
 		const string & 	getName(void) const;
 		const string & 	getType(void) const;
 		const string 	getQuoteName(void) const;
+	
 	protected:
+
 		int _hp;
 		int _ep;
 		int _level;
@@ -51,4 +53,5 @@ class ClapTrap
 		int _meleeDamage;
 		int _rangedDamage;
 		int _armorDamageReduction;
+
 };
