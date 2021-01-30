@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 00:35:06 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/23 01:21:58 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 10:35:47 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ class NinjaTrap : public ClapTrap
 		NinjaTrap(const NinjaTrap & other);
 		NinjaTrap & operator=(const NinjaTrap & other);
 	 	
-		void	ninjaShoebox(FragTrap & const frag);
-		void	ninjaShoebox(ScavTrap & const scav);
-		void	ninjaShoebox(ClapTrap & const clap);
-		void	ninjaShoebox(NinjaTrap & const ninja); 
+		void	ninjaShoebox(FragTrap & frag);
+		void	ninjaShoebox(ScavTrap & scav);
+		void	ninjaShoebox(ClapTrap & clap);
+		void	ninjaShoebox(NinjaTrap & ninja); 
 };

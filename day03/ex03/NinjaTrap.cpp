@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 00:35:03 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/23 02:18:13 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 10:38:54 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ typedef std::string string;
 
 NinjaTrap::NinjaTrap(void) : ClapTrap()
 {
-	std::cout << "I'm better than the fucking turtles!" << std::endl;
+	std::cout << "THEN PAY WITH YOUR BLOOD!" << std::endl;
 }
 
 NinjaTrap::NinjaTrap(string name) : ClapTrap(name, "NINJA-TP", 60, 60, 120, 120, 1, 60, 5, 0)
@@ -41,22 +41,22 @@ NinjaTrap & NinjaTrap::operator=(NinjaTrap const & other)
 	return *this;
 }
 
-void	NinjaTrap::ninjaShoebox(FragTrap & const frag)
+void	NinjaTrap::ninjaShoebox(FragTrap & frag)
 {
-	std::cout << getQuoteName() << "" << std::endl;	
+	std::cout << frag.getQuoteName() << "*MEMORY FRAGMENTATION STARTED...*" << std::endl;	
 }
 
-void	NinjaTrap::ninjaShoebox(ScavTrap & const scav)
+void	NinjaTrap::ninjaShoebox(ScavTrap & scav)
 {
-	std::cout << getQuoteName() << std::endl;
+	std::cout << scav.getQuoteName() << "I AM A SCAV TRAP, NOT A TRASH CAN!" << std::endl;
 }
 
-void	NinjaTrap::ninjaShoebox(ClapTrap & const clap)
+void	NinjaTrap::ninjaShoebox(ClapTrap & clap)
 {
-	std::cout << getQuoteName() << std::endl;
+	std::cout << clap.getQuoteName() << "I AM THE ORIGIN, MAAAN!" << std::endl;
 }
 
-void	NinjaTrap::ninjaShoebox(NinjaTrap & const ninja)
+void	NinjaTrap::ninjaShoebox(NinjaTrap & ninja)
 {
-	std::cout << getQuoteName() << std::endl;
+	std::cout << ninja.getQuoteName() << "WHERE IS MY FRUITS?! (NIHONGO GA WAKARUKA?)" << std::endl;
 }

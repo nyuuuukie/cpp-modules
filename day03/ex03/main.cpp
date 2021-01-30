@@ -6,50 +6,54 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 21:48:40 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/23 00:28:14 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/01/30 10:54:14 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "NinjaTrap.hpp"
 
 #include <cstdlib>
 #include <ctime>
 
-void attackFragTrap(FragTrap & frag, ScavTrap & scav)
+int specialAttack(ClapTrap *first, ClapTrap *second)
 {
-	int number = rand () % 3;
 	int damage = 0;
 
-	if (number == 0)
-		damage = frag.meleeAttack(scav.getName());
-	if (number == 1)
-		damage = frag.rangedAttack(scav.getName());
-	if (number == 2)
-		damage = frag.vaulthunter_dot_exe(scav.getName());
-	scav.takeDamage(damage);
-	frag.beRepaired(damage / 2);
+	if (first->getType() == "FR4G-TP")
+		damage = ((FragTrap *)first)->vaulthunter_dot_exe(second->getName());
+	else if (first->getType() == "SC4V-TP")
+	{
+		((ScavTrap *)first)->challengeNewcomer();
+		((ScavTrap *)first)->beRepaired(5);
+	}
+	else if (first->getType() == "NINJA-TP")
+	{
+		((NinjaTrap *)first)->ninjaShoebox(*second);
+		((NinjaTrap *)first)->beRepaired(8);
+	}
+	else
+		std::cout << "A HAVE NO SUPERPOWERS!" << std::endl;
+	return (damage);
 }
 
-void attackScavTrap(ScavTrap & scav, FragTrap & frag)
+void attackClapTrap(ClapTrap *first, ClapTrap *second)
 {
 	int number = rand () % 3;
 	int damage = 0;
 
 	if (number == 0)
-		damage = scav.meleeAttack(frag.getName());
-	if (number == 1)
-		damage = scav.rangedAttack(frag.getName());
-	else
-	{
-		scav.challengeNewcomer();
-		scav.beRepaired(5);
-	}
+		damage = first->meleeAttack(second->getName());
+	else if (number == 1)
+		damage = first->rangedAttack(second->getName());
+	else if (number == 2)
+		damage = specialAttack(first, second);
 	
 	if (damage != 0)
 	{
-		frag.takeDamage(damage);
-		scav.beRepaired(damage / 2);
+		second->takeDamage(damage);
+		first->beRepaired(damage / 2);
 	}
 }
 
@@ -60,19 +64,19 @@ void	win(const string & winner, const string & loser)
 	std::cout << loser << "!!!" << std::endl;	
 }
 
-int startBattle(FragTrap & frag, ScavTrap & scav)
+int startBattle(ClapTrap & first, ClapTrap & second)
 {
-	while (frag.getHP() > 0 && scav.getHP() > 0) 
+	while (first.getHP() > 0 && second.getHP() > 0) 
 	{
 		if (rand () % 2)
-			attackFragTrap(frag, scav);
+			attackClapTrap(&first, &second);
 		else
-			attackScavTrap(scav, frag);		
+			attackClapTrap(&second, &first);		
 	}
-	if (frag.getHP())
-		win(frag.getName(), scav.getName());
+	if (first.getHP())
+		win(first.getName(), second.getName());
 	else
-		win(scav.getName(), frag.getName());
+		win(second.getName(), first.getName());
 	return (0);
 }
 
@@ -82,9 +86,23 @@ int main(void)
 
 	FragTrap frag("Cybel");
 	ScavTrap scav("Iztron");
+	NinjaTrap ninja("Uzamaki");
+	ClapTrap clap;
 
-	std::cout << "------------------------------START BATTLE------------------------------" << std::endl;
+	std::cout << "------------------------------START FIRST BATTLE------------------------------" << std::endl;
 	startBattle(frag, scav);
-	std::cout << "------------------------------------------------------------------------" << std::endl;
+	std::cout << "------------------------------------------------------------------------------" << std::endl;
+
+	std::cout << std::endl;
+	
+	std::cout << "------------------------------START SECOND BATTLE------------------------------" << std::endl;
+	startBattle(ninja, clap);
+	std::cout << "-------------------------------------------------------------------------------" << std::endl;
+
+	//ninja.ninjaShoebox(frag);
+	//ninja.ninjaShoebox(scav);
+	//ninja.ninjaShoebox(clap);
+	//ninja.ninjaShoebox(ninja);
+	
 	return (0);
 }
