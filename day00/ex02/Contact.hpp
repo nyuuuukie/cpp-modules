@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 11:04:25 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/19 07:27:10 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/18 02:06:43 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ class Contact {
 		std::string underwearColor;
 		static int _amountOfContacts;
 
+	
 	public:
-
 		Contact(void);
 		~Contact(void);	
 		

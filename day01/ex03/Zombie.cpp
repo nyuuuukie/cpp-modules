@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 21:00:28 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/12 06:46:03 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:40:13 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ Zombie::Zombie(void)
 	_type = Zombie::getRandomType();
 	_announce = Zombie::getRandomAnnounce();
 
-	std::cout << _name + " is infected. -> zombie++" << std::endl;
+	std::cout << _name + " is infected. -> zombies++" << std::endl;
 }
 
 Zombie::~Zombie(void)

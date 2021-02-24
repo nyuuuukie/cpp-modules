@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 11:08:58 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/19 07:47:49 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/20 02:45:28 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	Contact::addContact(void)
 		{
 			*values[i] = "-_-";
 		}
-		
 	}
 	
 	this->index = _amountOfContacts + '1';

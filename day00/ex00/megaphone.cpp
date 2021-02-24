@@ -21,6 +21,8 @@ void    print_args(int argc, char *argv[])
 	std::cout << std::endl;
 }
 
+#include <string>
+
 int main(int argc, char *argv[])
 {
 	char *def_argv[2];
