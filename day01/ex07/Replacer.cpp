@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:46:30 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/02/26 13:32:07 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/27 16:40:16 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	Replacer::writeToFile(string text)
 {
 	std::ofstream file;
 
-	file.open(_outputFilename);
+	file.open(_outputFilename, std::ofstream::trunc);
 		
 	if (file.is_open())
 	{
@@ -153,7 +153,6 @@ void	Replacer::makeReplace(void)
 {
 	string total;
 	size_t start;
-	size_t end;
 
 	start = 0;
 	total = readFromFile();
@@ -162,8 +161,7 @@ void	Replacer::makeReplace(void)
 		_code = STRING_NOT_FOUND;
 		while ((start = total.find(_toReplace, start)) != string::npos)
 		{
-			end = start + _toReplace.length() - 1;
-			total.replace(start, end, _replacer);
+			total.replace(start, _toReplace.length(), _replacer);
 			_code = REPLACE_SUCCESS;
 		}
 		writeToFile(total);
