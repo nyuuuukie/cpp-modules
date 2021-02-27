@@ -5,21 +5,25 @@ NAME = phonebook
 CC = clang++
 CPPFLAGS = -Wall -Wextra -Werror
 
-SOURCES = Contact.class.cpp Table.class.cpp phonebook.cpp
+SOURCES = Contact.cpp Table.cpp Phonebook.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
+
+OBJ_DIR = obj
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CPPFLAGS) $^ -o $@
+	@$(CC) $(CPPFLAGS) $^ -o $@
+	@echo "${NAME} created"
 
 %.o : %.cpp
-	$(CC) $(CPPFLAGS) -c $(SOURCES)
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS)
+	@rm -rf ${OBJECTS}
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo "${NAME} deleted"
 
 re: fclean all

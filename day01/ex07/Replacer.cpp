@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:46:30 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/15 02:38:03 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/26 13:32:07 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,13 @@ string	Replacer::readFromFile(void)
 				total += "\n";
 		}
 		_code = READ_SUCCESS;
+		file.close();
 	}
 	else
 	{
 		_code = READ_FILE_ERROR;
 		printColorLine("File " + _inputFilename + " not found.", RED);
 	}
-	file.close();
 	return total;
 }
 

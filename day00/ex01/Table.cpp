@@ -6,7 +6,7 @@
 /*   By: mhufflep <mhufflep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 07:09:38 by mhufflep          #+#    #+#             */
-/*   Updated: 2021/01/12 06:57:32 by mhufflep         ###   ########.fr       */
+/*   Updated: 2021/02/27 05:06:44 by mhufflep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	Table::printTableLine(std::string data[])
 	std::cout << std::endl;
 }
 
-void	Table::setMaxWidth(std::string **data)
+void	Table::setMaxWidth()
 {
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -69,11 +69,56 @@ void	Table::setBorderSymbol(char borderSymbol)
 	this->borderSymbol = borderSymbol;
 }
 
-Table::Table(int rows, int columns, int columnsWidth)
+void	Table::setTitles(std::string *titles)
+{
+	this->titles = titles;
+}
+
+void	Table::setColumnData(int columnIndex, std::string *data)
+{
+	for (size_t i = 0; i < this->rows; i++)
+	{
+		this->data[i][columnIndex] = data[i];
+	}
+}
+
+void	Table::printTitles()
+{
+	printTableLine(this->titles);
+}
+
+void	Table::printTable()
+{
+	printTableBorder();
+	printTitles();
+	printTableBorder();
+	for (size_t i = 0; i < rows; i++)
+		printTableLine(data[i]);
+	printTableBorder();
+}
+
+Table::Table(int rows, int columns)
 {
 	this->rows = rows;
 	this->columns = columns;
-	this->columnWidth = columnsWidth;
+	this->columnWidth = 15;
+	this->setBorderColor(COLOR_GREEN);
+	this->separator = '|';
+	this->borderSymbol = '-';
+
+	if (rows > 0 && columns > 0)
+	{
+		this->data = new std::string*[rows];
+		for (size_t i = 0; i < this->rows; i++)
+			data[i] = new std::string[columns];
+	}
 }
 
-Table::~Table(void) { }
+Table::~Table(void) {
+	if (rows > 0 && columns > 0)
+	{
+		for (size_t i = 0; i < this->rows; i++)
+			delete [] data[i];
+		delete [] data;
+	}
+}
