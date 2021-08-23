@@ -1,51 +1,58 @@
+#include "Phonebook.hpp"
 #include "Contact.hpp"
 #include "Table.hpp"
-#include "Phonebook.hpp"
+#include "Parse.hpp"
 
 Contact::Contact(void) {
-	// this->_attr
+	this->_attr[0].setName("index");
+	this->_attr[1].setName("first name");
+	this->_attr[2].setName("last name");
+	this->_attr[3].setName("nickname");
+	this->_attr[4].setName("phone number");
+	this->_attr[5].setName("darkest secret");
 }
-Contact::~Contact(void) { }
+Contact::~Contact(void) {}
 
-void	Contact::addValues(int index)
+
+
+void
+Contact::addValues(int index)
 {
-	// std::string titles[] = { 
-	// 	"login", "nickname", "last name",
-	// 	"first name", "phone number","darkest secret",
-	// };
+	std::string name = "";
+	std::string value = "";
+	std::string title = "";
 
-	// std::string *values[] = {
-	// 	&_login, &_nickname, &_lastName,
-	// 	&_firstName, &_phoneNumber, &_darkestSecret,
-	// };
-	
-	for (int i = 0; i < 11; i++)
+	this->_attr[0].setValue(Parse::itos(index + 1, 10));
+	for (int i = 1; i < this->_size; i++)
 	{
-		std::string title = "Enter " + titles[i] + ": ";
-		getInputString(title, *values[i]);
+		name = this->_attr[i].getName();
+		title = "Enter " + name + ": ";
+
+		getInputString(title, value);
 		
-		if (values[i]->compare("") == 0)
-			*values[i] = "<null>";
+		if (value.compare("") == 0)
+			value = "not specified";
+
+		this->_attr[i].setValue(value);
 	}
-	this->_index = index + '1';
 }
 
-void	Contact::printContactInfo(void)
+void
+Contact::printContactInfo(void)
 {
-	const int rows = 12;
+	const int rows = Contact::getSize();
 	const int cols = 2;
 	
 	Table table(rows, cols);
 
-	// std::string attributes[rows] = {
-	// 	"index", "login", "nickname","last name", 
-	// 	"first name", "phone number", "darkest secret"
-	// };
+	std::string attributes[rows];
+	std::string values[rows];
 
-	// std::string values[rows] = { 
-	// 	_index, _login, _nickname, _lastName,
-	// 	_firstName, _phoneNumber, _darkestSecret,
-	// };
+	for (size_t i = 0; i < _size; i++)
+	{
+		attributes[i] = _attr[i].getName(); 
+		values[i] = _attr[i].getValue();
+	}
 
 	std::string titles[cols] = {
 		"Attribute", "Value"
@@ -58,24 +65,23 @@ void	Contact::printContactInfo(void)
 	table.printTable();
 }
 
-// std::string Contact::getIndex()
-// {
-// 	return this->_index;
-// }
+int
+Contact::getSize() {
+	return _size;
+}
 
-// std::string Contact::getFirstName()
-// {
-// 	return this->_firstName;
-// }
 
-// std::string Contact::getLastName()
-// {
-// 	return this->_lastName;
-// }
+std::string
+Contact::operator[](int index) {
+	return this->_attr[index].getName();
+}
 
-// std::string Contact::getNickname()
-// {
-// 	return this->_nickname;
-// }
-
-unsigned int Contact::_size = 5;
+std::string &
+Contact::operator[](std::string key) {
+	for (size_t i = 0; i < _size; i++)
+	{
+		if (this->_attr[i].getName() == key)
+			return this->_attr[i].getValue();
+	}
+	throw std::string("AttributeNotFound");
+}

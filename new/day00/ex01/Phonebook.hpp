@@ -4,12 +4,14 @@
 # include "Table.hpp"
 # include "Contact.hpp"
 
-# define CONTACTS 8
-
 class Phonebook
 {
-	public:
+	private:
+		static const int _size = 8;
+		Contact			 _contacts[_size];
+		static int		 _currentIndex;
 
+	public:
 		void		print();
 		void		search();
 		void		add();
@@ -18,12 +20,7 @@ class Phonebook
 		
 		static int	getCount(void);
 		void		addContact(void);
-		
-	private:
-	
-		Contact			 _contacts[CONTACTS];
-		static int		 _amountOf_contacts;
-		static const int _CONTACTS;
+
 };
 
 void	getInputString(std::string title, std::string &input);

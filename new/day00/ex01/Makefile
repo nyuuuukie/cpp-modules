@@ -5,7 +5,7 @@ NAME = deathnote
 CC = clang++
 CPPFLAGS = -Wall -Wextra -Werror
 
-SOURCES = Contact.cpp Table.cpp Phonebook.cpp main.cpp
+SOURCES = Contact.cpp Table.cpp Phonebook.cpp Attribute.cpp Parse.cpp main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 OBJ_DIR = obj

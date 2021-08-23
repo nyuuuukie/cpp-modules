@@ -1,38 +1,22 @@
 #include <iostream>
 
-#include "Contact.hpp"
 #include "Table.hpp"
+#include "Parse.hpp"
+#include "Contact.hpp"
 #include "Phonebook.hpp"
 
-void	printLine(std::string msg)
+void
+printLine(std::string msg)
 {
 	std::cout << msg << std::endl;
 }
 
-int getNumber(std::string s)
+void
+getInputString(std::string title, std::string &input)
 {
-	int i = 0;
-	int number = 0;
-
-	while (s[i] != '\0' && s[i] <= ' ')
-		i++;
-    while (s[i] >= '0' && s[i] <= '9')
-    {
-		number = number * 10 + (s[i] - '0');
-		i++;
-    }
-	if (s[i] != '\0' || s[i - 1] < '0' || s[i - 1] > '9')
-		number = -1;
-    return (number);
-}
-
-void	getInputString(std::string title, std::string &input)
-{
-	do 
-	{
-		if (std::cin.eof())
-		{
-	        std::cout << std::endl;
+	do {
+		if (std::cin.eof()) {
+	        std::cout << "  \b\b \b\b" << std::endl;
 	        std::cin.clear();
 	        std::cin.ignore(input.size());
 	        clearerr(stdin);   
@@ -42,71 +26,77 @@ void	getInputString(std::string title, std::string &input)
 	} while (std::cin.eof());
 }
 
-void	Phonebook::print()
+void
+Phonebook::print()
 {
 	const int rows = getCount();
 	const int cols = 4;
 	Table table(rows, cols);
 	
-	std::string	titles[cols] = {	
-		"index", "first name", "last name", "nickname"
-	};
-	
-	std::string indexes[rows];
-	std::string firstNames[rows];
-	std::string lastNames[rows];
-	std::string nicknames[rows];
+	std::string	titles[Contact::getSize()];
+	std::string data[cols][rows];
+
+	for (int i = 0; i < Contact::getSize(); i++)
+	{
+		titles[i] = (*this->_contacts)[i];
+	}
 
 	for (int i = 0; i < rows; i++)
 	{
-		indexes[i] = this->_contacts[i].getIndex();
-		nicknames[i] = this->_contacts[i].getNickname();
-		lastNames[i] = this->_contacts[i].getLastName();
-		firstNames[i] = this->_contacts[i].getFirstName();
+		try {
+			data[0][i] = this->_contacts[i]["index"];
+			data[1][i] = this->_contacts[i]["nickname"];
+			data[2][i] = this->_contacts[i]["last name"];
+			data[3][i] = this->_contacts[i]["first name"];
+		}
+		catch (std::string &error) {
+			std::cerr << error << std::endl;
+			data[0][i] = "invalid data";
+			data[1][i] = "invalid data";
+			data[2][i] = "invalid data";
+			data[3][i] = "invalid data";	
+		}
 	}
 
 	table.setTitles(titles);
-	table.setColumnData(0, indexes);
-	table.setColumnData(1, firstNames);
-	table.setColumnData(2, lastNames);
-	table.setColumnData(3, nicknames);	
+	for (int i = 0; i < cols; i++)
+		table.setColumnData(i, data[i]);
 	table.printTable();
 }
 
-void	Phonebook::add()
+void
+Phonebook::add()
 {
-	int lastIndex;
+	int last;
 	
-	lastIndex = Phonebook::getCount();
-	if (lastIndex < _CONTACTS)
-	{
-		this->_contacts[lastIndex].addValues(lastIndex);
-		Phonebook::_amountOf_contacts++;
-	}
-	else
-		printLine("Ugh, out of space, dear!");
+	last = Phonebook::getCount();
+	if (last < _size)
+		this->_contacts[last].addValues(last);
+	if (last < _size - 1)
+		Phonebook::_currentIndex++;
 }
 
-void	Phonebook::search()
+void
+Phonebook::search()
 {
-	int	searchIndex;
+	int	index;
 	std::string input;
 
 	print();
 	do {
 	 	getInputString("Index (0 to exit): ", input);
 
-		searchIndex = getNumber(input);
-		if (searchIndex == -1)
+		if (Parse::stoi(input, index))
 			printLine("Invalid phonebook index.");
-		else if (searchIndex > getCount())
+		else if (index > getCount())
 			printLine("No contact with this index.");
-		else if (searchIndex > 0 && searchIndex < _CONTACTS + 1)
-			this->_contacts[searchIndex - 1].printContactInfo();
-	} while (searchIndex != 0);
+		else if (index > 0 && index < _size + 1)
+			this->_contacts[index - 1].printContactInfo();
+	} while (index != 0);
 }
 
-void	Phonebook::help()
+void
+Phonebook::help()
 {
 	std::cout << "Type " << COLOR_RED << "ADD " << COLOR_RESET;
 	std::cout << "to create new contact." << std::endl; 
@@ -116,7 +106,8 @@ void	Phonebook::help()
 	std::cout << "to quit." << std::endl;
 }
 
-void	Phonebook::exit()
+void
+Phonebook::exit()
 {
 	printLine(COLOR_RED);
 	printLine("-All those contacts will be lost in time");
@@ -124,10 +115,10 @@ void	Phonebook::exit()
 	printLine(COLOR_RESET);
 }
 
-int Phonebook::getCount()
+int
+Phonebook::getCount()
 {
-	return _amountOf_contacts;
+	return _currentIndex;
 }
 
-int Phonebook::_amountOf_contacts = 0;
-const int Phonebook::_CONTACTS = CONTACTS;
+int Phonebook::_currentIndex = 0;

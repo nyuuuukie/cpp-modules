@@ -10,14 +10,14 @@ Attribute::setName(std::string name) {
     this->_name = name;
 }
 
-std::string
+std::string &
 Attribute::getValue(void) {
-    this->_value;
+    return this->_value;
 }
 
 std::string
-Attribute::getName(void) {
-    this->_name;
+Attribute::getName(void) const {
+    return this->_name;
 }
 
 Attribute::Attribute() {}

@@ -5,6 +5,17 @@
 
 class Table
 {
+	private:
+		
+		char		separator;
+		char		borderSymbol;
+		size_t		rows;
+		size_t		columns;
+		size_t		columnWidth;
+		std::string currentColor;
+		std::string *titles;
+		std::string **data;
+	
 	public:
 		
 		Table(int rows, int columns);
@@ -21,16 +32,5 @@ class Table
 		void		printTableBorder();
 		void		printTitles();
 		void		printTable();
-		
-	private:
-		
-		char		separator;
-		char		borderSymbol;
-		size_t		rows;
-		size_t		columns;
-		size_t		columnWidth;
-		std::string currentColor;
-		std::string *titles;
-		std::string **data;
 
 };
