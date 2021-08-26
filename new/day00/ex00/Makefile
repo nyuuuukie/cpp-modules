@@ -3,7 +3,7 @@
 NAME = megaphone
 
 CXX = clang++
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 SOURCES = megaphone.cpp
 OBJECTS = $(SOURCES:.cpp=.o)

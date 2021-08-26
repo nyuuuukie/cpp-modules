@@ -1,25 +1,30 @@
 .PHONY: all re fclean clean
 
-NAME = phonebook
+NAME = accounting
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-SOURCES = Contact.cpp phonebook.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJDIR = .obj
 
-all: $(NAME)
+SOURCES = Account.cpp tests.cpp
+OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
+
+all: objdir $(NAME)
+
+objdir:
+	@if ! [ -d ${OBJDIR} ] ; then mkdir ${OBJDIR} ; fi
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CPPFLAGS) $^ -o $@
+	@$(CC) $(CPPFLAGS) $^ -o $@
 
-%.o : %.cpp
-	$(CC) $(CPPFLAGS) -c $(SOURCES)
+${OBJDIR}/%.o : %.cpp
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJECTS)
+	@rm -rf ${OBJDIR}
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all

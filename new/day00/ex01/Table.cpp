@@ -5,37 +5,37 @@
 
 Table::Table(int rows, int columns)
 {
-	this->rows = rows;
-	this->columns = columns;
-	this->columnWidth = 15;
-	this->setBorderColor(COLOR_GREEN);
-	this->separator = '|';
-	this->borderSymbol = '-';
+	_rows = rows;
+	_columns = columns;
+	_columnWidth = 15;
+	setBorderColor(COLOR_GREEN);
+	_separator = '|';
+	_borderSymbol = '-';
 
 	if (rows > 0 && columns > 0)
 	{
-		this->data = new std::string*[rows];
-		for (size_t i = 0; i < this->rows; i++)
-			data[i] = new std::string[columns];
+		_data = new std::string*[rows];
+		for (size_t i = 0; i < _rows; i++)
+			_data[i] = new std::string[columns];
 	}
 }
 
 Table::~Table(void) {
-	if (rows > 0 && columns > 0)
+	if (_rows > 0 && _columns > 0)
 	{
-		for (size_t i = 0; i < this->rows; i++)
-			delete [] data[i];
-		delete [] data;
+		for (size_t i = 0; i < this->_rows; i++)
+			delete [] _data[i];
+		delete [] _data;
 	}
 }
 
 void
 Table::printTableBorder()
 {
-	std::cout << currentColor;
-	for (size_t i = 0; i <= (columnWidth + 1) * columns; i++)
+	std::cout << _currentColor;
+	for (size_t i = 0; i <= (_columnWidth + 1) * _columns; i++)
 	{
-		std::cout << borderSymbol;
+		std::cout << _borderSymbol;
 	}
 	std::cout << COLOR_RESET << std::endl;
 }
@@ -45,15 +45,15 @@ Table::printTableLine(std::string data[])
 {
 	std::string dataTemp;
 
-	std::cout << currentColor << separator << COLOR_RESET;
-	for (size_t i = 0; i < columns; i++)
+	std::cout << _currentColor << _separator << COLOR_RESET;
+	for (size_t i = 0; i < _columns; i++)
 	{
-		if (data[i].length() > columnWidth)
-			dataTemp = data[i].substr(0, columnWidth - 3) + "...";
+		if (data[i].length() > _columnWidth)
+			dataTemp = data[i].substr(0, _columnWidth - 3) + "...";
 		else
 			dataTemp = data[i];
-		std::cout << std::setw(columnWidth) << dataTemp;
-		std::cout << currentColor << separator << COLOR_RESET;
+		std::cout << std::setw(_columnWidth) << dataTemp;
+		std::cout << _currentColor << _separator << COLOR_RESET;
 	}
 	std::cout << std::endl;
 }
@@ -61,7 +61,7 @@ Table::printTableLine(std::string data[])
 void
 Table::printTitles()
 {
-	printTableLine(this->titles);
+	printTableLine(this->_titles);
 }
 
 void
@@ -70,8 +70,8 @@ Table::printTable()
 	printTableBorder();
 	printTitles();
 	printTableBorder();
-	for (size_t i = 0; i < rows; i++)
-		printTableLine(data[i]);
+	for (size_t i = 0; i < _rows; i++)
+		printTableLine(_data[i]);
 	printTableBorder();
 }
 
@@ -79,12 +79,12 @@ Table::printTable()
 void
 Table::setMaxWidth()
 {
-	for (size_t i = 0; i < rows; i++)
+	for (size_t i = 0; i < _rows; i++)
 	{
-		for (size_t j = 0; j < columns; j++)
+		for (size_t j = 0; j < _columns; j++)
 		{
-			if (data[i][j].length() > columnWidth)
-				columnWidth = data[i][j].length();
+			if (_data[i][j].length() > _columnWidth)
+				_columnWidth = _data[i][j].length();
 		}
 	}
 }
@@ -92,32 +92,32 @@ Table::setMaxWidth()
 void
 Table::setBorderColor(std::string color)
 {
-	this->currentColor = color;
+	this->_currentColor = color;
 }
 
 void
 Table::setSeparator(char separator)
 {
-	this->separator = separator;
+	this->_separator = separator;
 }
 
 void
 Table::setBorderSymbol(char borderSymbol)
 {
-	this->borderSymbol = borderSymbol;
+	this->_borderSymbol = borderSymbol;
 }
 
 void
 Table::setTitles(std::string *titles)
 {
-	this->titles = titles;
+	this->_titles = titles;
 }
 
 void
 Table::setColumnData(int columnIndex, std::string *data)
 {
-	for (size_t i = 0; i < this->rows; i++)
+	for (size_t i = 0; i < this->_rows; i++)
 	{
-		this->data[i][columnIndex] = data[i];
+		this->_data[i][columnIndex] = data[i];
 	}
 }

@@ -3,25 +3,28 @@
 NAME = deathnote
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+
+OBJDIR = .obj
 
 SOURCES = Contact.cpp Table.cpp Phonebook.cpp Attribute.cpp Parse.cpp main.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
-OBJ_DIR = obj
+all: objdir $(NAME)
 
-all: $(NAME)
+objdir:
+	@if ! [ -d ${OBJDIR} ] ; then mkdir ${OBJDIR} ; fi
 
 $(NAME): $(OBJECTS)
 	@$(CC) $(CPPFLAGS) $^ -o $@
 	@echo "-Hello, Yagami Light, my name is Ryuk."
 	@echo "-Since you started makefile you are the holder of the ${NAME}."
 
-%.o : %.cpp
+${OBJDIR}/%.o : %.cpp %.hpp
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf ${OBJECTS}
+	@rm -rf ${OBJDIR}
 
 fclean: clean
 	@rm -rf $(NAME)

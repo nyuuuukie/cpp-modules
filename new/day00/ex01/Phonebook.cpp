@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Table.hpp"
 #include "Parse.hpp"
 #include "Contact.hpp"
@@ -54,7 +52,7 @@ Phonebook::print()
 			data[0][i] = "invalid data";
 			data[1][i] = "invalid data";
 			data[2][i] = "invalid data";
-			data[3][i] = "invalid data";	
+			data[3][i] = "invalid data";
 		}
 	}
 

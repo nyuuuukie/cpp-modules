@@ -9,9 +9,9 @@ int main()
 	{
 		getInputString("> ", input);
 
-		if (input.compare("HELP") == 0)
-			phonebook.help();
-		else if (input.compare("ADD") == 0)
+		// if (input.compare("HELP") == 0)
+		// 	phonebook.help();
+		if (input.compare("ADD") == 0)
 			phonebook.add();
 		else if (input.compare("SEARCH") == 0)
 			phonebook.search();
