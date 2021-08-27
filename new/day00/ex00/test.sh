@@ -32,3 +32,5 @@ do
     fi
     echo " | $res"
 done
+
+rm out.txt

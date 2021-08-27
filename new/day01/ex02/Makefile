@@ -1,13 +1,13 @@
 .PHONY: all re fclean clean
 
-NAME = account
+NAME = ex02
 
 CC = clang++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 OBJDIR = .obj
 
-SOURCES = Account.cpp tests.cpp
+SOURCES = main.cpp
 OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
 all: objdir $(NAME)
