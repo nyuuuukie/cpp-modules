@@ -1,7 +1,7 @@
 #include "Replacer.hpp"
 #include "Utils.hpp"
 
-void getInputString(std::string title, std::string &input)
+void getInput(std::string title, std::string &input)
 {
 	do 
 	{
@@ -17,22 +17,6 @@ void getInputString(std::string title, std::string &input)
 	} while (std::cin.eof());
 }
 
-//int	getParameter(std::string &prm, std::string title)
-//{
-//	std::string input = "";
-
-//	do {
-//		std::cout << title;
-//		getline(std::cin, input);
-		
-//		if (std::cin.eof())
-//			return (1);
-//	}
-//	while (input.compare("") == 0);
-//	prm = input;
-//	return (0);
-//}
-
 int main(void)
 {
 	Replacer repl;
@@ -44,9 +28,9 @@ int main(void)
 
 	for (;;)
 	{
-		getInputString("Enter filename: ", filename);
-		getInputString("What do you want to replace: ", replacee);
-		getInputString("What do you want to replace with: ", replacer);
+		getInput("Enter input filename: ", filename);
+		getInput("Enter \"replacee\": ", replacee);
+		getInput("Enter replacer: ", replacer);
 
 		repl.setExtension(extension);
 		repl.setInput(filename);
@@ -61,5 +45,6 @@ int main(void)
 	repl.makeReplace();
 	if (repl.getCode() == STRING_NOT_FOUND)
 		Utils::printColorLine("\nPattern " + replacee + " not found.", RED);
-	return (repl.getCode());
+	
+	return repl.getCode();
 }

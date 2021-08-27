@@ -18,15 +18,15 @@ Replacer::Replacer(std::string filename, std::string replacee, std::string repla
 	this->_replacer = replacer;
 	this->setExtension("replace");
 	this->setOutput(filename);
-	printColorLine("I solemnly swear that I am up to no good.", WHITE);
+	Utils::printColorLine("I solemnly swear that I am up to no good.", WHITE);
 }
 
 Replacer::~Replacer(void)
 {
-	printLine("");
+	Utils::printLine("");
 	if (_code == WRITE_SUCCESS)
-		printColorLine("Mischief managed.", WHITE);
-	printColorLine("Nox.", WHITE);
+		Utils::printColorLine("Mischief managed.", WHITE);
+	Utils::printColorLine("Nox.", WHITE);
 }
 
 code	Replacer::getCode(void)
@@ -88,7 +88,7 @@ void	Replacer::makeReplace(void)
 	size_t start;
 
 	start = 0;
-	total = readFromFile();
+	total = IO::readFromFile(_input);
 	if (_code == READ_SUCCESS)
 	{
 		_code = STRING_NOT_FOUND;
@@ -97,6 +97,6 @@ void	Replacer::makeReplace(void)
 			total.replace(start, _replacee.length(), _replacer);
 			_code = REPLACE_SUCCESS;
 		}
-		writeToFile(total);
+		IO::writeToFile(_output, total);
 	}
 }
