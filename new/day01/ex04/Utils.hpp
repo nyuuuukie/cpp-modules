@@ -1,16 +1,18 @@
 #pragma once
 
-#include <string>
-#include <iostream>
+# include <string>
+# include <iostream>
+ 
+# define DEFAULT "\033[0m"
+# define WHITE "\033[37m"
+# define RED "\033[31m"
+# define MAGENTA "\033[35m"
+
 
 class Utils
 {
-private:
-
-public:
-	static std::string toUpperCase(std::string src);
-	static void	printLine(const std::string &text);
-	static void	printColorLine(const std::string &text, const std::string color);
+	public:
+		static std::string toUpperCase(std::string src);
+		static void	print(const std::string &text);
+		static void	print(const std::string &text, const std::string color);
 };
-
-

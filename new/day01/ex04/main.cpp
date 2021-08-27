@@ -7,11 +7,11 @@ void getInput(std::string title, std::string &input)
 	{
 		if (std::cin.eof())
 		{
-	        std::cout << std::endl;
-	        std::cin.clear();
-	        std::cin.ignore(input.size());
-	        clearerr(stdin);   
-	    }
+			std::cout << std::endl;
+			std::cin.clear();
+			std::cin.ignore(input.size());
+			clearerr(stdin);
+		}
 		std::cout << title;
 		getline(std::cin, input);
 	} while (std::cin.eof());
@@ -32,19 +32,16 @@ int main(void)
 		getInput("Enter \"replacee\": ", replacee);
 		getInput("Enter replacer: ", replacer);
 
-		repl.setExtension(extension);
-		repl.setInput(filename);
-		repl.setReplacee(replacee);
-		repl.setReplacer(replacer);
-
-		if (repl.getCode() != BAD_ARGUMENTS)
-			break;
-
-		Utils::printLine("Wrong input. ");
+		if (!repl.setExtension(extension) && 
+			!repl.setReplacer(replacer) &&
+			!repl.setReplacee(replacee) &&
+			!repl.setInput(filename)) {
+			break ;
+		}	
+		Utils::print("Wrong input.", RED);
 	}
-	repl.makeReplace();
-	if (repl.getCode() == STRING_NOT_FOUND)
-		Utils::printColorLine("\nPattern " + replacee + " not found.", RED);
+	if (repl.makeReplace() == 2)
+		Utils::print("Pattern " + replacee + " not found.", RED);
 	
-	return repl.getCode();
+	return 0;
 }

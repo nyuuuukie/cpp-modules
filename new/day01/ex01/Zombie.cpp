@@ -9,7 +9,7 @@ Zombie::Zombie(std::string name) : _name(name)
 Zombie::Zombie(void)
 {
 	_announceText = "<No announce>";
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Constructor called" << std::endl;
 }
 
 Zombie::~Zombie(void)

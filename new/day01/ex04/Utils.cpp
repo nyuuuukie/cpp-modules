@@ -9,14 +9,14 @@ std::string	Utils::toUpperCase(std::string src) {
 	return src;
 }
 
-void	Utils::printLine(const std::string &text)
+void	Utils::print(const std::string &text)
 {
 	std::cout << text << std::endl;
 }
 
-void	Utils::printColorLine(const std::string &text, const std::string color)
+void	Utils::print(const std::string &text, const std::string color)
 {
 	std::cout << color;
-	printLine(text);
-	std::cout << DEF;
+	print(text);
+	std::cout << DEFAULT;
 }

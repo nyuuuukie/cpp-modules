@@ -27,25 +27,30 @@ getInputString(std::string title, std::string &input)
 void
 Phonebook::print()
 {
-	const int rows = getCount();
-	const int cols = 4;
+	int cols = 4;
+	int rows = getCount();
+	if (getCount() / _size)
+		rows = _size;
 	Table table(rows, cols);
 	
-	std::string	titles[Contact::getSize()];
-	std::string data[cols][rows];
+	std::string	*titles = new std::string[Contact::getSize()];
+	std::string **data = new std::string*[cols];
+	for (int i = 0; i < cols; i++) {
+		data[i] = new std::string[_size];
+	}
 
-	for (int i = 0; i < Contact::getSize(); i++)
-	{
+	for (int i = 0; i < Contact::getSize(); i++) {
 		titles[i] = (*this->_contacts)[i];
 	}
 
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < rows && i < _size ; i++)
 	{
+		std::cout << i << std::endl;
 		try {
 			data[0][i] = this->_contacts[i]["index"];
-			data[1][i] = this->_contacts[i]["nickname"];
+			data[1][i] = this->_contacts[i]["first name"];
 			data[2][i] = this->_contacts[i]["last name"];
-			data[3][i] = this->_contacts[i]["first name"];
+			data[3][i] = this->_contacts[i]["nickname"];
 		}
 		catch (std::string &error) {
 			std::cerr << error << std::endl;
@@ -60,6 +65,11 @@ Phonebook::print()
 	for (int i = 0; i < cols; i++)
 		table.setColumnData(i, data[i]);
 	table.printTable();
+
+	delete [] titles;
+	for (int i = 0; i < cols; i++)
+		delete [] data[i];
+	delete [] data;
 }
 
 void
@@ -67,11 +77,10 @@ Phonebook::add()
 {
 	int last;
 	
-	last = Phonebook::getCount();
+	last = Phonebook::getCount() % _size;
 	if (last < _size)
 		this->_contacts[last].addValues(last);
-	if (last < _size - 1)
-		Phonebook::_currentIndex++;
+	Phonebook::_currentIndex++;
 }
 
 void
@@ -86,7 +95,7 @@ Phonebook::search()
 
 		if (Parse::stoi(input, index))
 			printLine("Invalid phonebook index.");
-		else if (index > getCount())
+		else if (index > getCount() || index > _size)
 			printLine("No contact with this index.");
 		else if (index > 0 && index < _size + 1)
 			this->_contacts[index - 1].printContactInfo();

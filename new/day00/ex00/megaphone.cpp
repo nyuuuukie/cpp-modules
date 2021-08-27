@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 void    touppercase(char *str)
 {
@@ -21,7 +22,6 @@ void    print_args(int argc, char *argv[])
 	std::cout << std::endl;
 }
 
-#include <string>
 
 int main(int argc, char *argv[])
 {

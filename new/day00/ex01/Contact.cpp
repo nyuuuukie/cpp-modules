@@ -45,8 +45,8 @@ Contact::printContactInfo(void)
 	
 	Table table(rows, cols);
 
-	std::string attributes[rows];
-	std::string values[rows];
+	std::string *attributes = new std::string[rows];
+	std::string *values = new std::string[rows];
 
 	for (size_t i = 0; i < _size; i++)
 	{
@@ -63,6 +63,9 @@ Contact::printContactInfo(void)
 	table.setColumnData(1, values);
 	table.setMaxWidth();
 	table.printTable();
+
+	delete [] attributes;
+	delete [] values;
 }
 
 int

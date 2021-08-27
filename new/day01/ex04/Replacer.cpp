@@ -4,99 +4,93 @@
 
 Replacer::Replacer(void)
 {
-	_code = DEFAULT;
-	Utils::printLine("");
-	Utils::printColorLine("I solemnly swear that I am up to no good.", WHITE);
-	Utils::printLine("");
-}	
+	Utils::print("I solemnly swear that I am up to no good.", MAGENTA);
+	Utils::print("");
+}
 
 Replacer::Replacer(std::string filename, std::string replacee, std::string replacer)
 {
-	this->_code = DEFAULT;
 	this->_input = filename;
 	this->_replacee = replacee;
 	this->_replacer = replacer;
 	this->setExtension("replace");
 	this->setOutput(filename);
-	Utils::printColorLine("I solemnly swear that I am up to no good.", WHITE);
+	Utils::print("I solemnly swear that I am up to no good.", MAGENTA);
 }
 
 Replacer::~Replacer(void)
 {
-	Utils::printLine("");
-	if (_code == WRITE_SUCCESS)
-		Utils::printColorLine("Mischief managed.", WHITE);
-	Utils::printColorLine("Nox.", WHITE);
+	Utils::print("");
+	Utils::print("Mischief managed.", MAGENTA);
+	Utils::print("Nox.", MAGENTA);
 }
 
-code	Replacer::getCode(void)
-{
-	return this->_code;
-}
-
-void	Replacer::setExtension(std::string ext)
+int
+Replacer::setExtension(std::string ext)
 {
 	this->_extension = ext;
 	this->setOutput(_input);
+	return 0;
 }
 
-void	Replacer::setReplacee(std::string text)
+int
+Replacer::setReplacee(std::string text)
 {
 	if (text.compare("") == 0) {
-		_code = BAD_ARGUMENTS;
+		return 1;
 	}
-	else {
-		this->_replacee = text;
-	}
+	this->_replacee = text;
+	return 0;
 }
 
-void	Replacer::setReplacer(std::string text)
+int
+Replacer::setReplacer(std::string text)
 {
-	if (text.compare("") == 0) {
-		_code = BAD_ARGUMENTS;
-	}
-	else {
-		this->_replacer = text;
-	}
+	this->_replacer = text;
+	return 0;
 }
 
-void	Replacer::setInput(std::string filename)
+int
+Replacer::setInput(std::string filename)
 {
 	if (filename.compare("") == 0) {
-		_code = BAD_ARGUMENTS;
+		return 1;
 	}
-	else {
-		this->_input = filename;
-		this->setOutput(filename);
-	}
+	this->_input = filename;
+	this->setOutput(filename);
+	return 0;
 }
 
-void	Replacer::setOutput(std::string filename)
+int
+Replacer::setOutput(std::string filename)
 {
 	if (filename.compare("") == 0) {
-		_code = BAD_ARGUMENTS;
+		return 1;
 	}
-	else {
-		_code = DEFAULT;
-		this->_output = Utils::toUpperCase(filename) + "." + _extension;
-	}
+	this->_output = Utils::toUpperCase(filename) + "." + _extension;
+	return 0;
 }
 
-void	Replacer::makeReplace(void)
+int
+Replacer::makeReplace(void)
 {
 	std::string total;
-	size_t start;
 
-	start = 0;
-	total = IO::readFromFile(_input);
-	if (_code == READ_SUCCESS)
-	{
-		_code = STRING_NOT_FOUND;
-		while ((start = total.find(_replacee, start)) != std::string::npos)
-		{
-			total.replace(start, _replacee.length(), _replacer);
-			_code = REPLACE_SUCCESS;
-		}
-		IO::writeToFile(_output, total);
+	if (IO::read(_input, total)) {
+		Utils::print("File " + _input + " not found.", RED);
+		return 1;
 	}
+
+	size_t start = 0;
+	bool found = false;
+	while ((start = total.find(_replacee, start)) != std::string::npos) {
+		total = total.substr(0, start) + _replacer + total.substr(start + _replacee.length(), total.length() - 1);
+		found = true;
+	}
+
+	if (IO::write(_output, total)) {
+		Utils::print("File " + _output + " cannot not be opened.");
+		return 1;
+	}
+	return found ? 0 : 2;
 }

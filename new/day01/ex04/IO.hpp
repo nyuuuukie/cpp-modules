@@ -5,11 +5,9 @@
 
 class IO
 {
-private:
-
-public:
-	static std::string	readFromFile(std::string filename);
-	static void			writeToFile(std::string filename, std::string text);
+	public:
+		static int	read(std::string filename, std::string &total);
+		static int	write(std::string filename, std::string text);
 };
 
 

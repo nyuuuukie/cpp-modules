@@ -1,11 +1,10 @@
 #include "IO.hpp"
 
-std::string	IO::readFromFile(std::string filename)
+int
+IO::read(std::string filename, std::string &total)
 {
 	std::string input;
-	std::string total;
-	
-	total = "";
+
 	std::ifstream file(filename);
 	if (file.is_open())
 	{
@@ -16,18 +15,14 @@ std::string	IO::readFromFile(std::string filename)
 			if (!file.eof())
 				total += "\n";
 		}
-		_code = READ_SUCCESS;
 		file.close();
+		return 0;
 	}
-	else
-	{
-		_code = READ_FILE_ERROR;
-		printColorLine("File " + _input + " not found.", RED);
-	}
-	return total;
+	return 1;
 }
 
-void	IO::writeToFile(std::string filename, std::string text)
+int
+IO::write(std::string filename, std::string text)
 {
 	std::ofstream file;
 
@@ -36,12 +31,8 @@ void	IO::writeToFile(std::string filename, std::string text)
 	if (file.is_open())
 	{
 		file << text;
-		if (_code != STRING_NOT_FOUND)
-			_code = WRITE_SUCCESS;
+		file.close();
+		return 0;
 	}
-	else
-	{
-		printLine("File " + _output + " cannot not be opened.");
-	}
-	file.close();
+	return 1;
 }
