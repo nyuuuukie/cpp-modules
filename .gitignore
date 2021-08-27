@@ -1,4 +1,12 @@
+# FS temp files
 .DS_Store
 */.DS_Store
-a.out
+
+# vscode
 .vscode
+
+# executables
+a.out
+
+# object files
+*.o
