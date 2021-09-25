@@ -14,23 +14,23 @@ Table::Table(int rows, int columns)
 
 	if (rows > 0 && columns > 0)
 	{
-		_data = new std::string*[rows];
+		_data = new std::string *[rows];
 		for (size_t i = 0; i < _rows; i++)
 			_data[i] = new std::string[columns];
 	}
 }
 
-Table::~Table(void) {
+Table::~Table(void)
+{
 	if (_rows > 0 && _columns > 0)
 	{
 		for (size_t i = 0; i < this->_rows; i++)
-			delete [] _data[i];
-		delete [] _data;
+			delete[] _data[i];
+		delete[] _data;
 	}
 }
 
-void
-Table::printTableBorder()
+void Table::printTableBorder()
 {
 	std::cout << _currentColor;
 	for (size_t i = 0; i <= (_columnWidth + 1) * _columns; i++)
@@ -40,8 +40,7 @@ Table::printTableBorder()
 	std::cout << COLOR_RESET << std::endl;
 }
 
-void
-Table::printTableLine(std::string data[])
+void Table::printTableLine(std::string data[])
 {
 	std::string dataTemp;
 
@@ -58,14 +57,12 @@ Table::printTableLine(std::string data[])
 	std::cout << std::endl;
 }
 
-void
-Table::printTitles()
+void Table::printTitles()
 {
 	printTableLine(this->_titles);
 }
 
-void
-Table::printTable()
+void Table::printTable()
 {
 	printTableBorder();
 	printTitles();
@@ -75,9 +72,7 @@ Table::printTable()
 	printTableBorder();
 }
 
-
-void
-Table::setMaxWidth()
+void Table::setMaxWidth()
 {
 	for (size_t i = 0; i < _rows; i++)
 	{
@@ -89,32 +84,27 @@ Table::setMaxWidth()
 	}
 }
 
-void
-Table::setBorderColor(std::string color)
+void Table::setBorderColor(std::string color)
 {
 	this->_currentColor = color;
 }
 
-void
-Table::setSeparator(char separator)
+void Table::setSeparator(char separator)
 {
 	this->_separator = separator;
 }
 
-void
-Table::setBorderSymbol(char borderSymbol)
+void Table::setBorderSymbol(char borderSymbol)
 {
 	this->_borderSymbol = borderSymbol;
 }
 
-void
-Table::setTitles(std::string *titles)
+void Table::setTitles(std::string *titles)
 {
 	this->_titles = titles;
 }
 
-void
-Table::setColumnData(int columnIndex, std::string *data)
+void Table::setColumnData(int columnIndex, std::string *data)
 {
 	for (size_t i = 0; i < this->_rows; i++)
 	{

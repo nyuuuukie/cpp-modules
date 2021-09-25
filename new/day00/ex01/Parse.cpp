@@ -1,7 +1,6 @@
 #include "Parse.hpp"
 
-int
-Parse::stoi(std::string s, int &res)
+int Parse::stoi(std::string s, int &res)
 {
 	int i = 0;
 	int num = 0;
@@ -10,7 +9,7 @@ Parse::stoi(std::string s, int &res)
 		i++;
 	if (s[i] == '\0')
 		return (1);
-   
+
 	while (s[i])
 	{
 		if (s[i] < '0' || s[i] > '9')
@@ -21,14 +20,14 @@ Parse::stoi(std::string s, int &res)
 		i++;
 	}
 	res = num;
-    return (0);
+	return (0);
 }
 
 std::string
 Parse::itos(int number, int base)
 {
 	std::string res = "";
-	
+
 	if (number / base)
 		res = itos(number / base, base);
 	if (number % base < 10)

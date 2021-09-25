@@ -3,7 +3,7 @@
 NAME = deathnote
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g
+CPPFLAGS = -Wall -Wextra -Werror
 
 OBJDIR = .obj
 
@@ -28,6 +28,6 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	@echo "-That was intresting. Goodbye."
+	@echo "-That was interesting. Goodbye."
 
 re: fclean all

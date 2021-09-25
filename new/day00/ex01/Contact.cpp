@@ -3,7 +3,8 @@
 #include "Table.hpp"
 #include "Parse.hpp"
 
-Contact::Contact(void) {
+Contact::Contact(void)
+{
 	this->_attr[0].setName("index");
 	this->_attr[1].setName("first name");
 	this->_attr[2].setName("last name");
@@ -11,12 +12,10 @@ Contact::Contact(void) {
 	this->_attr[4].setName("phone number");
 	this->_attr[5].setName("darkest secret");
 }
+
 Contact::~Contact(void) {}
 
-
-
-void
-Contact::addValues(int index)
+void Contact::addValues(int index)
 {
 	std::string name = "";
 	std::string value = "";
@@ -29,7 +28,7 @@ Contact::addValues(int index)
 		title = "Enter " + name + ": ";
 
 		getInputString(title, value);
-		
+
 		if (value.compare("") == 0)
 			value = "not specified";
 
@@ -37,12 +36,11 @@ Contact::addValues(int index)
 	}
 }
 
-void
-Contact::printContactInfo(void)
+void Contact::printContactInfo(void)
 {
 	const int rows = Contact::getSize();
 	const int cols = 2;
-	
+
 	Table table(rows, cols);
 
 	std::string *attributes = new std::string[rows];
@@ -50,13 +48,12 @@ Contact::printContactInfo(void)
 
 	for (size_t i = 0; i < _size; i++)
 	{
-		attributes[i] = _attr[i].getName(); 
+		attributes[i] = _attr[i].getName();
 		values[i] = _attr[i].getValue();
 	}
 
 	std::string titles[cols] = {
-		"Attribute", "Value"
-	};
+		"Attribute", "Value"};
 
 	table.setTitles(titles);
 	table.setColumnData(0, attributes);
@@ -64,23 +61,24 @@ Contact::printContactInfo(void)
 	table.setMaxWidth();
 	table.printTable();
 
-	delete [] attributes;
-	delete [] values;
+	delete[] attributes;
+	delete[] values;
 }
 
-int
-Contact::getSize() {
+int Contact::getSize()
+{
 	return _size;
 }
 
-
 std::string
-Contact::operator[](int index) {
+Contact::operator[](int index)
+{
 	return this->_attr[index].getName();
 }
 
 std::string &
-Contact::operator[](std::string key) {
+Contact::operator[](std::string key)
+{
 	for (size_t i = 0; i < _size; i++)
 	{
 		if (this->_attr[i].getName() == key)

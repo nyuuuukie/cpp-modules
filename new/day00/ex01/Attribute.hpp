@@ -4,17 +4,17 @@
 
 class Attribute
 {
-    private:
-        std::string _name;
-        std::string _value;
+private:
+	std::string _name;
+	std::string _value;
 
-    public:
-        void setValue(std::string);
-        void setName(std::string);
-        
-        std::string &getValue(void);
-        std::string getName(void) const;
+public:
+	void setValue(std::string);
+	void setName(std::string);
 
-        Attribute();
-        ~Attribute();
+	std::string &getValue(void);
+	std::string getName(void) const;
+
+	Attribute();
+	~Attribute();
 };
