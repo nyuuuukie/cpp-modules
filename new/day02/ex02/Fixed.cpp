@@ -2,36 +2,36 @@
 
 Fixed::Fixed(void)
 {
-	_value = 0;
-	std::cout << "Default constructor called" << std::endl;
+	_inf = false;
+	setRawBits(0);
 }
 
 Fixed::Fixed(float num)
 {
-	_value = roundf(num * (1 << _fractionalCount));
-	std::cout << "Float constructor called" << std::endl;
+	_inf = false;
+	int n = roundf(num * (1 << _fractionalCount));
+	setRawBits(n);
 }
 
 Fixed::Fixed(int num)
 {
-	_value = num << _fractionalCount;
-	std::cout << "Int constructor called" << std::endl;
+	_inf = false;
+	int n = num << _fractionalCount;
+	setRawBits(n);
 }
 
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& other)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
-	std::cout << "Assignation operator called" << std::endl;
+	this->_inf = other._inf;
 	this->_value = other.getRawBits();
 	return *this;
 }
@@ -51,6 +51,8 @@ void Fixed::setRawBits(int const raw)
 // Convertations functions
 float Fixed::toFloat(void) const
 {
+	if (_inf)
+		return static_cast<float>(1.0f / 0.0f);
 	return (static_cast<float>(_value) / static_cast<float>(1 << _fractionalCount));
 }
 
@@ -62,57 +64,55 @@ int Fixed::toInt(void) const
 
 // Comparison operator overloading
 bool Fixed::operator>( const Fixed &rhs ) const {
-	return this->_value > rhs._value;
+	return getRawBits() > rhs.getRawBits();
 }
 
 bool Fixed::operator<( const Fixed &rhs ) const {
-	return this->_value < rhs._value;
+	return getRawBits() < rhs.getRawBits();
 }
 
 bool Fixed::operator>=( const Fixed &rhs ) const {
-	return this->_value >= rhs._value;
+	return getRawBits() >= rhs.getRawBits();
 }
 
 bool Fixed::operator<=( const Fixed &rhs ) const {
-	return this->_value <= rhs._value;
+	return getRawBits() <= rhs.getRawBits();
 }
 
 bool Fixed::operator!=( const Fixed &rhs ) const {
-	return this->_value != rhs._value;
+	return getRawBits() != rhs.getRawBits();
 }
 
 bool Fixed::operator==( const Fixed &rhs ) const {
-	return this->_value == rhs._value;
+	return getRawBits() == rhs.getRawBits();
 }
 
 // Ariphmetic overloads
-Fixed Fixed::operator+( const Fixed &rhs ) {
+Fixed Fixed::operator+( const Fixed &rhs ) const {
 	Fixed res;
 
 	res._value = this->_value + rhs._value;
 	return res;
 }
 
-Fixed Fixed::operator-( const Fixed &rhs ) {
+Fixed Fixed::operator-( const Fixed &rhs ) const {
 	Fixed res;
 
 	res._value = this->_value - rhs._value;
 	return res;
 }
 
-Fixed Fixed::operator*( const Fixed &rhs ) {
-	//Fixed res;
-
-	//res._value = this->_value * rhs._value;
+Fixed Fixed::operator*( const Fixed &rhs ) const {
 	return Fixed(this->toFloat() * rhs.toFloat());
 }
 
-Fixed Fixed::operator/( const Fixed &rhs ) {
-	//Fixed res;
+Fixed Fixed::operator/( const Fixed &rhs ) const {
+	Fixed res;
 
-	//res._value = this->_value / rhs._value;
-	//return res;
-	return Fixed(this->toFloat() * rhs.toFloat());
+	res = Fixed(this->toFloat() / rhs.toFloat());
+	if (rhs._value == 0)
+		res._inf = true;
+	return res;
 }
 
 Fixed& Fixed::operator++() {

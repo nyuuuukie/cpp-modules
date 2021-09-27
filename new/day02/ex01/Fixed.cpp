@@ -2,7 +2,7 @@
 
 Fixed::Fixed(void)
 {
-	_value = 0;
+	setRawBits(0);
 	std::cout << "Default constructor called" << std::endl;
 }
 

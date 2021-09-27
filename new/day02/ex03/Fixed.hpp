@@ -51,6 +51,8 @@ class Fixed
 		static const Fixed& max( const Fixed &lhs, const Fixed &rhs );
 
 	private:
+		//bool _nan;
+		bool _inf;
 		int _value;
 		static const int _fractionalCount;
 };

@@ -31,10 +31,10 @@ class Fixed
 		bool operator==( const Fixed &rhs ) const;
 
 		// Ariphmetic overloads
-		Fixed operator+( const Fixed &rhs );
-		Fixed operator-( const Fixed &rhs );
-		Fixed operator*( const Fixed &rhs );
-		Fixed operator/( const Fixed &rhs );
+		Fixed operator+( const Fixed &rhs ) const;
+		Fixed operator-( const Fixed &rhs ) const;
+		Fixed operator*( const Fixed &rhs ) const;
+		Fixed operator/( const Fixed &rhs ) const;
 
 		//Increment and decrement overloading
 		Fixed& operator--();
@@ -51,6 +51,8 @@ class Fixed
 		static const Fixed& max( const Fixed &lhs, const Fixed &rhs );
 
 	private:
+		//bool _nan;
+		bool _inf;
 		int _value;
 		static const int _fractionalCount;
 };

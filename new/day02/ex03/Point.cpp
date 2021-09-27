@@ -1,27 +1,20 @@
 #include "Point.hpp"
 
-Point::Point( void ) {
-	this->_x = Fixed(0);
-	this->_y = Fixed(0);
-}
+Point::Point( void ) : _x(0), _y(0) {}
 
-Point::~Point( void ) {
-
-}
+Point::~Point( void ) {}
 
 Point::Point( const Point &other ) {
 	*this = other;
 }
 
-Point::Point( const float x, const float y ) {
-	this->_x = Fixed(x);
-	this->_y = Fixed(y);
-}
+Point::Point( const float x, const float y ) : _x(x), _y(y) {}
 	
 Point& Point::operator=( const Point &other ) {
-	this->_x = Fixed(other._x);
-	this->_y = Fixed(other._y);
-
+	if (this != &other) {
+		const_cast<Fixed &>(this->_x) = other.x();
+		const_cast<Fixed &>(this->_y) = other.y();
+	}
 	return *this;
 }
 
@@ -34,11 +27,15 @@ const Fixed& Point::y( void ) const {
 }
 
 void Point::x( const Fixed &p ) {
-	this->_x = p;
+	Point res = Point(p.toFloat(), this->_y.toFloat());
+	
+	*this = res;
 }
 
 void Point::y( const Fixed &p ) {
-	this->_y = p;
+	Point res = Point(this->_x.toFloat(), p.toFloat());
+	
+	*this = res;
 }
 
 
