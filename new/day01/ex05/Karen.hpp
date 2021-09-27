@@ -4,6 +4,7 @@
 
 class Karen {
 	private:
+		bool run( int i );
 		void info( void );
 		void debug( void );
 		void error( void );

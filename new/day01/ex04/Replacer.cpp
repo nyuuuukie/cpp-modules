@@ -22,7 +22,6 @@ Replacer::~Replacer(void)
 {
 	Utils::print("");
 	Utils::print("Mischief managed.", MAGENTA);
-	Utils::print("Nox.", MAGENTA);
 }
 
 int
@@ -75,22 +74,31 @@ int
 Replacer::makeReplace(void)
 {
 	std::string total;
+	std::string leftPart; 
+	std::string rightPart;
 
 	if (IO::read(_input, total)) {
-		Utils::print("File " + _input + " not found.", RED);
+		Utils::print("File " + _input + " not found or cannot be opened.", RED);
 		return 1;
 	}
 
 	size_t start = 0;
 	bool found = false;
 	while ((start = total.find(_replacee, start)) != std::string::npos) {
-		total = total.substr(0, start) + _replacer + total.substr(start + _replacee.length(), total.length() - 1);
+		leftPart = total.substr(0, start);
+		rightPart = total.substr(start + _replacee.length(), total.length() - 1);
+		total = leftPart + _replacer + rightPart;
+		//total = total.substr(0, start) + _replacer + total.substr(start + _replacee.length(), total.length() - 1);
 		found = true;
 	}
 
 	if (IO::write(_output, total)) {
-		Utils::print("File " + _output + " cannot not be opened.");
+		Utils::print("File " + _output + " cannot be opened.");
 		return 1;
 	}
-	return found ? 0 : 2;
+
+	if (!found) {
+		Utils::print("Pattern " + _replacee + " not found.", RED);
+	}
+	return 0;
 }

@@ -35,12 +35,17 @@ void Karen::undef( void ) {
 	std::cout << "Probably complaining about insignificant problems" << std::endl;
 }
 
-void Karen::complain( std::string level ) {
-	int lvl = -1;
-	for (int i = 0; i < 4; i++) {
-		if (this->levels[i] == level)
-			lvl = i;
+int Karen::getLevelIndex(std::string level) {
+	int i = 0;
+
+	while (i < 4 && levels[i] != level) {
+		i++;
 	}
+	return i;
+}
+
+void Karen::complain( std::string level ) {
+	int lvl = getLevelIndex(level);
 	
 	switch (lvl) {
 		case 0:

@@ -3,7 +3,7 @@
 NAME = replacer
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CPPFLAGS = -Wall -Wextra -Werror
 
 OBJDIR = .obj
 

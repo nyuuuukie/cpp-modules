@@ -31,9 +31,13 @@ void Karen::error( void ) {
 	std::cout << "ERR: " << "How dare you not to put endline?!" << std::endl;
 }
 	
+bool Karen::run( int index ) {
+	(this->*(func[index]))();
+	return false;
+}
+
 void Karen::complain( std::string level ) {
 	for (int i = 0; i < 4; i++) {
-		if (levels[i] == level)
-			(this->*(func[i]))();
+		(levels[i] == level) && run(i);
 	}
 }

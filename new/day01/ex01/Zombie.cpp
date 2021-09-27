@@ -17,13 +17,13 @@ Zombie::~Zombie(void)
 	std::cout << "Destructor called" << std::endl;
 }
 
-void	Zombie::setAnnounceText(std::string text)
+void Zombie::setAnnounceText(std::string text)
 {
-	this->_announceText = text; 
+	this->_announceText = text;
 }
 
-void	Zombie::announce(void) const
+void Zombie::announce(void) const
 {
 	std::cout << "[ " + _name + " ]: ";
-	std::cout << _announceText << std::endl; 
+	std::cout << _announceText << std::endl;
 }

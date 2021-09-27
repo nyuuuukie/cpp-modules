@@ -32,16 +32,11 @@ int main(void)
 		getInput("Enter \"replacee\": ", replacee);
 		getInput("Enter replacer: ", replacer);
 
-		if (!repl.setExtension(extension) && 
-			!repl.setReplacer(replacer) &&
-			!repl.setReplacee(replacee) &&
-			!repl.setInput(filename)) {
+		if (repl.setExtension(extension) || repl.setReplacer(replacer) || 
+			repl.setReplacee(replacee) || repl.setInput(filename)) {
+			Utils::print("Invalid input.\n", RED);
+		} else
 			break ;
-		}	
-		Utils::print("Wrong input.", RED);
 	}
-	if (repl.makeReplace() == 2)
-		Utils::print("Pattern " + replacee + " not found.", RED);
-	
-	return 0;
+	return repl.makeReplace();
 }
