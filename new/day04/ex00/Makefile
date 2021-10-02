@@ -1,14 +1,14 @@
 .PHONY: all re fclean clean
 
-NAME = ex03
+NAME = ex00
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic #-Wshadow-field #-Wshadow-all
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 OBJDIR = .obj
 
-HEADERS = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp DiamondTrap.hpp Utils.hpp
-SOURCES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp Utils.cpp
+HEADERS = Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp
+SOURCES = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
 all: objdir $(NAME)
