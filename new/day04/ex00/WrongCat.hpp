@@ -9,7 +9,7 @@ class WrongCat : public WrongAnimal
 {
 	public:
 		WrongCat(void);
-		~WrongCat(void);
+		virtual ~WrongCat(void);
 		WrongCat(const WrongCat & other);
 		WrongCat & operator=(const WrongCat & other);
 

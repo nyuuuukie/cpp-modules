@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Brain.hpp"
 #include <string>
 #include <iostream>
 
@@ -9,7 +10,7 @@ class Animal
 		Animal(void);
 		virtual ~Animal(void);
 		Animal(const Animal & other);
-		Animal & operator=(const Animal & other);
+		virtual Animal & operator=(const Animal & other);
 
 		const std::string &getType( void ) const;
 		void setType(const std::string &type);
