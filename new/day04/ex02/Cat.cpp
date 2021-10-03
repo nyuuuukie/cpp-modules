@@ -32,3 +32,4 @@ void Cat::makeSound( void ) const {
 Brain *Cat::getBrain( void ) const {
 	return this->_brain;
 }
+
