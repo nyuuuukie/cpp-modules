@@ -1,14 +1,14 @@
 .PHONY: all re fclean clean
 
-NAME = ex02
+NAME = ex03
 
 CC = clang++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 OBJDIR = .obj
 
-HEADERS = Animal.hpp Cat.hpp Dog.hpp Brain.hpp
-SOURCES = main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+HEADERS = AMateria.hpp Character.hpp Cure.hpp Ice.hpp MateriaSource.hpp IMateriaSource.hpp ICharacter.hpp
+SOURCES = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSouce.cpp main.cpp 
 OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
 all: objdir $(NAME)

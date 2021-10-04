@@ -32,5 +32,10 @@ int main()
 		delete animals[i];
 	delete[] animals;
 
+	Dog basic;
+	{
+		Dog tmp = basic;
+	}
+
 	return 0;
 }

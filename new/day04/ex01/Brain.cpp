@@ -11,8 +11,7 @@ static std::string	makeIdea() {
 	return idea;
 }
 
-Brain::Brain( void ) {
-	_size = 100;
+Brain::Brain( void ) : _size(100) {
 	_ideas = new std::string[_size];
 	
 	if (this->_ideas != 0) {
