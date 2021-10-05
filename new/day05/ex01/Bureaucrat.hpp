@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <iostream>
 
+class Form;
+
 class Bureaucrat
 {
 	private:
@@ -27,7 +29,9 @@ class Bureaucrat
 		void increase( unsigned int x = 1 );
 		void decrease( unsigned int x = 1 );
 
-		class	GradeTooHighException : public std::exception {
+		void signForm(Form &form);
+
+		class GradeTooHighException : public std::exception {
 			private:
 				std::string _msg;	
 
@@ -37,7 +41,7 @@ class Bureaucrat
 				virtual const char* what() const throw();
 		};
 
-		class	GradeTooLowException : public std::exception {
+		class GradeTooLowException : public std::exception {
 			private:
 				std::string _msg;
 
@@ -49,3 +53,6 @@ class Bureaucrat
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &rhs);
+
+#include "Form.hpp"
+

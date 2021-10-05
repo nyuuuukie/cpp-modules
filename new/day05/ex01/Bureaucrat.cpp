@@ -20,9 +20,9 @@ Bureaucrat::Bureaucrat(void) : _maxGrade(1), _minGrade(150), _name("Anonymous"),
 
 Bureaucrat::Bureaucrat(const int grade) : _maxGrade(1), _minGrade(150), _grade(grade) {
 	if (_grade < _maxGrade) {
-		throw GradeTooHighException("Grade is too high (<Exception>)");
+		throw GradeTooHighException("Grade is too high");
 	} else if (_grade > _minGrade) {
-		throw GradeTooLowException("Grade is too low (<Exception>)");
+		throw GradeTooLowException("Grade is too low");
 	}	
 
 	std::cout << "[Bureaucrat constructor]" << std::endl;
@@ -64,11 +64,11 @@ void Bureaucrat::increase( unsigned int x ) {
 
 	_grade -= x;
 	if (x > static_cast<unsigned int>(_minGrade)) {
-		throw GradeTooHighException("Grade is too high (<Exception>)");
+		throw GradeTooHighException("Grade is too high");
 	}
 
  	if (_grade < _maxGrade) {
-		throw GradeTooHighException("Grade is too high (<Exception>)");
+		throw GradeTooHighException("Grade is too high");
 	}
 }
 
@@ -76,11 +76,21 @@ void Bureaucrat::decrease( unsigned int x ) {
 	_grade += x;
 
 	if (x > static_cast<unsigned int>(_minGrade)) {
-		throw GradeTooLowException("Grade is too low (<Exception>)");
+		throw GradeTooLowException("Grade is too low");
 	}
 
 	if (_grade > _minGrade) {
-		throw GradeTooLowException("Grade is too low (<Exception>)");		
+		throw GradeTooLowException("Grade is too low");		
+	}
+}
+
+void Bureaucrat::signForm(Form &form) {
+	try {
+		form.beSigned(*this);
+		std::cout << _name << " signs " << form.getName() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << _name << " cannot sign " << form.getName();
+		std::cout << " because " << e.what() << std::endl;
 	}
 }
 
