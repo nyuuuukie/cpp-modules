@@ -52,11 +52,14 @@ void Character::equip(AMateria* m) {
 	if (_idx >= _maxSize)
 		return ;
 
-	std::cout << m->getType() << " prepare to be equipped!" << std::endl;
 	if (m != 0) {
-		std::cout << m->getType() << " equipped!" << std::endl;
-		_storage[_idx] = m;
-		_idx++;
+		for (int i = 0; i < _maxSize; i++) {
+			if (_storage[i] == 0) {
+				_storage[i] = m;
+				std::cout << m->getType() << " equipped!" << std::endl;
+				break;
+			}
+		}
 	}
 }
 
@@ -66,7 +69,6 @@ void Character::unequip(int idx) {
 	
 	if (_storage[idx]) {
 		_storage[idx] = 0;
-		_idx--;
 	}
 }
 
