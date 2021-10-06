@@ -6,19 +6,21 @@ Bureaucrat::Bureaucrat(void) : _maxGrade(1), _minGrade(150), _name("Anonymous"),
 
 Bureaucrat::Bureaucrat(const int grade) : _maxGrade(1), _minGrade(150), _grade(grade) {
 	if (_grade < _maxGrade) {
-		throw GradeTooHighException("Grade is too high");
+		throw GradeTooHighException("Grade is too high (<Exception>)");
 	} else if (_grade > _minGrade) {
-		throw GradeTooLowException("Grade is too low");
-	}	
+		throw GradeTooLowException("Grade is too low (<Exception>)");
+	}
 
-	std::cout << "[Bureaucrat constructor]" << std::endl;
-}
-
-Bureaucrat::Bureaucrat(const std::string & name) :  _maxGrade(1), _minGrade(150), _name(name) {
 	std::cout << "[Bureaucrat constructor]" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string & name, const int grade) : _maxGrade(1), _minGrade(150), _name(name), _grade(grade) {
+	if (_grade < _maxGrade) {
+		throw GradeTooHighException("Grade is too high (<Exception>)");
+	} else if (_grade > _minGrade) {
+		throw GradeTooLowException("Grade is too low (<Exception>)");
+	}
+
 	std::cout << "[Bureaucrat constructor]" << std::endl;
 }
 

@@ -10,7 +10,7 @@ int main()
 	try {
 
 		b1 = Bureaucrat("John", 10);
-		b2 = Bureaucrat("Amy", 15);
+		b2 = Bureaucrat("Amy", -15);
 		f1 = Form("f1", 12, 53);
 
 		std::cout << b1 << std::endl;
@@ -23,6 +23,6 @@ int main()
 	
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
-	}	
+	}
 	return 0;
 }
