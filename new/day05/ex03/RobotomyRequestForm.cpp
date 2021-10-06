@@ -21,13 +21,17 @@ RobotomyRequestForm & RobotomyRequestForm::operator=(const RobotomyRequestForm &
 	return *this;
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
-	Form::execute(executor);
-	
+void RobotomyRequestForm::executeAction(Bureaucrat const &executor) const {
 	std::cout << "* drilling noises *" << std::endl;
+	
 	srand(time(0));
 	if (rand() % 2)
-		std::cout << _target << " has been robotomized successfully." << std::endl;
+		std::cout << _target << " has been robotomized by " << executor.getName() << std::endl;
 	else
 		std::cout << _target << " robotomization failed" << std::endl;
+}
+
+
+void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
+	Form::execute(executor);
 }

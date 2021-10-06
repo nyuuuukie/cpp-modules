@@ -10,7 +10,7 @@ class Bureaucrat
 	private:
 		const int _maxGrade;
 		const int _minGrade;
-		std::string _name;
+		const std::string _name;
 		int _grade;
 	
 	public:	

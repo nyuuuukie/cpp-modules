@@ -88,7 +88,8 @@ void Form::execute(Bureaucrat const & executor) const {
 	if (executor.getGrade() > this->getExecRequiredGrade()) {
 		throw Form::GradeTooLowException("exec grade is too low");
 	}
-	std::cout << "* form execution sounds *" << std::endl;
+	executeAction(executor);
+	//std::cout << "* form execution sounds *" << std::endl;
 }
 
 //Operators overloads

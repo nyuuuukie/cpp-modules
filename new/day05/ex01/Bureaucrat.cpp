@@ -46,7 +46,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat & other) : _maxGrade(1), _minGrade(150) 
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat & other) {
 	if (this != &other) {
-		this->_name = other._name;
+		const_cast<std::string &>(this->_name) = other._name;
 		this->_grade = other._grade;
 	}
 	return *this;

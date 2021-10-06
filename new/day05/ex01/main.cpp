@@ -11,7 +11,7 @@ int main()
 
 		b1 = Bureaucrat("John", 10);
 		b2 = Bureaucrat("Amy", 15);
-		f1 = Form("f1", 2, 53);
+		f1 = Form("f1", 12, 53);
 
 		std::cout << b1 << std::endl;
 		std::cout << b2 << std::endl;

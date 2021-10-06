@@ -22,14 +22,14 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreation
 	return *this;
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-	Form::execute(executor);
 
+void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
 	std::string filename = _target + "_shrubbery";
 	std::ofstream out;
 
-	out.open(filename.c_str());
+	std::cout << executor.getName() << " planting tree..." << std::endl;
 
+	out.open(filename.c_str());
 	if (out.is_open()) {
 		out << "                                        " << std::endl;
 		out << "                .,-'```````````--.      " << std::endl;
@@ -56,7 +56,12 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 		out << "             .ddFdHH|HHhbb.             " << std::endl; 
 		out << "########################################" << std::endl;
 		out.close();
-	} else {
+	}
+	else {
 		std::cout << "Cannot open file \"" + _target + "_shrubbery\"" << std::endl;
 	}
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
+	Form::execute(executor);
 }
