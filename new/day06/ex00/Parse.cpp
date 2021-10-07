@@ -1,5 +1,6 @@
 #include "Parse.hpp"
 #include <cstdlib>
+#include <limits>
 
 const std::string Parse::_whitespaces = " \n\r\t\f\v";
 
@@ -94,7 +95,6 @@ double Parse::readDouble( void ) {
 	if (e != "" && e != "f")
 		throw InvalidParse();
 
-	
 	return num;
 }
 
@@ -107,13 +107,17 @@ void Parse::toInt( void ) {
 
 void Parse::toChar( void ) {
 
-	char num = static_cast<char>(readInt());
+	int num = static_cast<int>(readInt());
 		
-	if (!isprint(num) || isspace(num)) {
+	if (num <= 32 || num == 127) {
 		throw NonDisplayable();
 	}
-		
-	std::cout << "\'" << num << "\'" << std::endl;
+
+	if ((num < std::numeric_limits<char>::min()) 
+	 || (num > std::numeric_limits<char>::max()))
+		throw InvalidParse();
+	
+	std::cout << "\'" << static_cast<char>(num) << "\'" << std::endl;
 }
 
 void Parse::toFloat( void ) {

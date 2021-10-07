@@ -3,7 +3,7 @@
 NAME = convert
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Wno-unused-parameter
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Wno-unused-parameter -g
 
 OBJDIR = .obj
 HEADERS = Parse.hpp      
