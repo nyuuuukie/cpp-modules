@@ -1,8 +1,7 @@
 #include "easyfind.hpp"
+
 #include <iostream>
 #include <vector>
-#include <set>
-#include <array>
 #include <list>
 
 int main()
@@ -16,14 +15,14 @@ int main()
 	
 	try {
 		std::vector<int>::iterator res = easyfind(v, 42);
-		std::cout << *res << "was found" << std::endl;
+		std::cout << *res << " was found" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
 		std::vector<int>::iterator res = easyfind(v, 4221);
-		std::cout << *res << "was found" << std::endl;
+		std::cout << *res << " was found" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}

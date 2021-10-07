@@ -3,7 +3,7 @@
 NAME = ex00
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 OBJDIR = .obj
 

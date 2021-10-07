@@ -4,6 +4,7 @@
 int main()
 {
 	MutantStack<int> mstack;
+
 	mstack.push(5);
 	mstack.push(17);
 	std::cout << mstack.top() << std::endl;
@@ -13,15 +14,26 @@ int main()
 	mstack.push(5);
 	mstack.push(737);
 	mstack.push(0);
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
-	++it;
-	--it;
-	while (it != ite)
-	{
-		std::cout << *it << std::endl;
-		++it;
+
+	MutantStack<int>::iterator beg = mstack.begin();
+	MutantStack<int>::iterator end = mstack.end();
+
+	MutantStack<int>::reverse_iterator rbeg = mstack.rbegin();
+	MutantStack<int>::reverse_iterator rend = mstack.rend();
+
+	while (beg != end) {
+		std::cout << *beg;
+		++beg;
 	}
-	std::stack<int> s(mstack);
+
+	std::cout << std::endl;
+
+	while (rbeg != rend) {
+		std::cout << *rbeg;
+		++rbeg;
+	}
+	std::cout << std::endl;
+
+	std::stack<int> copy(mstack);
 	return 0;
 }

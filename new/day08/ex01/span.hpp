@@ -4,12 +4,15 @@
 #include <iostream>
 #include <vector>
 
-typedef std::vector<int>::iterator iter;
+using std::vector;
 
 class Span
 {
+	typedef vector<int>::iterator iter;
+	typedef vector<int>::const_iterator const_iter;
+	
 	private:
-		std::vector<int> _storage;
+		vector<int> _storage;
 		int _count;
 		int _max;
 
@@ -21,8 +24,9 @@ class Span
 
 		void addNumber( int number );
 		void addNumber(iter beg, iter end);
-		int shortestSpan() const;
-		int longestSpan() const;
+		void addNumber( int *arr, int n );
+		int shortestSpan();
+		int longestSpan();
 
 	class Exception : public std::exception {
 		private:
