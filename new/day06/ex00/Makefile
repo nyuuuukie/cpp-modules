@@ -3,11 +3,11 @@
 NAME = convert
 
 CC = clang++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Wno-unused-parameter
 
 OBJDIR = .obj
-HEADERS =       
-SOURCES = main.cpp 
+HEADERS = Parse.hpp      
+SOURCES = main.cpp Parse.cpp
 OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
 all: objdir $(NAME)
