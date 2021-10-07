@@ -84,6 +84,11 @@ int Parse::readInt( void ) {
 	if (*end != '\0' && *end != '.')
 		throw InvalidParse();
 
+	
+	if ((num < std::numeric_limits<int32_t>::min()) 
+	 || (num > std::numeric_limits<int32_t>::max()))
+		throw InvalidParse();
+
 	return num;
 }
 
