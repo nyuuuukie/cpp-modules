@@ -1,21 +1,20 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(void) : ClapTrap("Anon")
 {
-	_hp = 100;
-	_ep = 100;
-	_damage = 30;
+	_hp = FragTrap::__hp__;
+	_ep = FragTrap::__ep__;
+	_damage = FragTrap::__dmg__;
 	_type = "FR4G-TP";
 
 	std::cout << getInfo() << " Gotcha! [Frag constructor]" << std::endl;
 }
 
-FragTrap::FragTrap(const std::string name)
+FragTrap::FragTrap(const std::string name) : ClapTrap(name)
 {
-	_name = name;
-	_hp = 100;
-	_ep = 100;
-	_damage = 30;
+	_hp = FragTrap::__hp__;
+	_ep = FragTrap::__ep__;
+	_damage = FragTrap::__dmg__;
 	_type = "FR4G-TP";
 	std::cout << getInfo() << " Gotcha! [Frag constructor]" << std::endl;
 }

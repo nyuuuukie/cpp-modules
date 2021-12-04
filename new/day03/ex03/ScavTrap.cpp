@@ -1,24 +1,21 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void) : ClapTrap("Anon")
 {
-	_name = "Anon";
-	_hp = 100;
-	_ep = 50;
-	_damage = 20;
+	_hp = ScavTrap::__hp__;
+	_ep = ScavTrap::__ep__;
+	_damage = ScavTrap::__dmg__;
 	_type = "SC4V-TP";
 	std::cout << getInfo() << " Let me teach you! [Scav constructor]" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string name)
+ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 {
-	_name = name;
-	_hp = 100;
-	_ep = 50;
-	_damage = 20;
+	_hp = ScavTrap::__hp__;
+	_ep = ScavTrap::__ep__;
+	_damage = ScavTrap::__dmg__;
 	_type = "SC4V-TP";
-	std::cout << getInfo() << " Let me teach you! [Scav constructor]";
-	std::cout << std::endl;
+	std::cout << getInfo() << " Let me teach you! [Scav constructor]" << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)

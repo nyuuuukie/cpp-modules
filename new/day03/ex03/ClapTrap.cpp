@@ -3,7 +3,7 @@
 ClapTrap::ClapTrap(void) : _hp(10), _ep(10), _damage(0), _type("CL4P-TP")
 {
 	_name = "Anon";
-	std::cout << getInfo() << " created. [Clap constructor]" << std::endl;
+	std::cout << getInfo() << " created. [Clap def constructor]" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name) : _hp(10), _ep(10), _damage(0), _type("CL4P-TP")
@@ -62,7 +62,8 @@ const std::string ClapTrap::getInfo(void) const {
 	
 	res += "name:" + getName() + " ";
 	res += "hp:" + Utils::itos(getHP(), 10) + " ";
-	res += "ep:" + Utils::itos(getEP(), 10) + " ]";
+	res += "ep:" + Utils::itos(getEP(), 10) + " ";
+	res += "dmg:" + Utils::itos(_damage, 10) + " ]";
 
 	return res;
 }

@@ -1,25 +1,23 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(void) : FragTrap("Anon"), ScavTrap("Anon")
+DiamondTrap::DiamondTrap(void) : ClapTrap("Anon_clap_name"), ScavTrap("Anon"),  FragTrap("Anon") 
 {
-	this->_name = "Anon";
 	this->_type = "DI4M-TP";
-	ClapTrap::_name = "Anon_clap_name";
-	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
-	this->_damage = FragTrap::_damage;
+	this->_hp = FragTrap::__hp__;
+	this->_ep = ScavTrap::__ep__;
+	this->_damage = FragTrap::__dmg__;
 	
 	std::cout << "Kureiji Daiyamondo! [Diamond constructor]" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string name) : FragTrap(name), ScavTrap(name)
+
+DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
-	this->_name = name;
 	this->_type = "DI4M-TP";
-	ClapTrap::_name = name + "_clap_name";
-	this->_hp = FragTrap::_hp;
-	this->_ep = ScavTrap::_ep;
-	this->_damage = FragTrap::_damage;
+	this->_name = name;
+	this->_hp = FragTrap::__hp__;
+	this->_ep = ScavTrap::__ep__;
+	this->_damage = FragTrap::__dmg__;
 
 	std::cout << getInfo() << " Kureiji Daiyamondo! [Diamond constructor]" << std::endl;
 }
