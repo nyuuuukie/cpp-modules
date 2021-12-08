@@ -8,7 +8,7 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 OBJDIR = .obj
 
 HEADERS = AMateria.hpp Character.hpp Cure.hpp Ice.hpp MateriaSource.hpp IMateriaSource.hpp ICharacter.hpp
-SOURCES = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSouce.cpp main.cpp 
+SOURCES = AMateria.cpp Character.cpp Cure.cpp Ice.cpp MateriaSource.cpp main.cpp 
 OBJECTS = $(addprefix ${OBJDIR}/, $(SOURCES:.cpp=.o))
 
 all: objdir $(NAME)
