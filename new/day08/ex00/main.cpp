@@ -6,41 +6,59 @@
 
 int main()
 {
-	//int arr[] = {33, -135, 42, 274, 216, -17, 256, -347, 756};
-	//int n = sizeof(arr) / sizeof(arr[0]);
+	int _a[5] = {1, 9, 5, 6, 4};
+	double _b[5] = {4.5, 6.4, 3.55, 7.65, 2.11};
+	std::string _c[5] = {"one", "two", "three", "four", "five"};
 
-	std::vector<int>v(100);
-	for (int i = 0; i < 100; i++)
-		v.push_back(i);
+	std::vector<int> av(_a, _a + 5);
+	std::vector<double> bv(_b, _b + 5);
+	std::vector<std::string> cv(_c, _c + 5);
+
+	std::list<int> al(_a, _a + 5);
+	std::list<double> bl(_b, _b + 5);
+	std::list<std::string> cl(_c, _c + 5);
+
+	try {
+		std::vector<int>::iterator res = easyfind(av, 5);
+		std::cout << *res << " was found" << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+
+	try {
+		std::vector<double>::iterator res = easyfind(bv, 6.4);
+		std::cout << *res << " was found" << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 	
 	try {
-		std::vector<int>::iterator res = easyfind(v, 42);
+		std::vector<std::string>::iterator res = easyfind(cv, "three");
 		std::cout << *res << " was found" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-
-	try {
-		std::vector<int>::iterator res = easyfind(v, 4221);
-		std::cout << *res << " was found" << std::endl;
-	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
-
-	std::list<int>l(100);
 	
 	try {
-		std::list<int>::iterator res = easyfind(l, 0);
+		std::list<int>::iterator res = easyfind(al, 6);
 		std::cout << *res << " was found" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
-		std::list<int>::iterator res = easyfind(l, 1000);
+		std::list<double>::iterator res = easyfind(bl, 3.55);
 		std::cout << *res << " was found" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
+
+	try {
+		std::list<std::string>::iterator res = easyfind(cl, "four");
+		std::cout << *res << " was found" << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+
 	return 0;
 }
